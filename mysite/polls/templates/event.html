@@ -1,0 +1,176 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+{% extends my_template %}
+{% block content %}
+
+<html lang="en">
+<head>
+        {% load static %}
+
+	<meta charset="UTF-8">
+	<title></title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+	<!-- Site Properities -->
+	<title>Homepage - Semantic</title>
+
+	<link rel="stylesheet" type="text/css" href={% static "events.css"%}>
+
+
+
+	<link rel="stylesheet" href="main.css">
+
+
+	<style type="text/css">
+
+		.hidden.menu {
+			display: none;
+		}
+
+ .imageContainer {
+	   display:block;
+       width:100%;
+       height:500px;
+	   overflow: hidden;
+
+       background-image: url({% static 'image/int_wps_1920_main2.jpg'%});
+ }
+
+
+
+	</style>
+
+</head>
+
+<div class="container">
+	<div class="imageContainer" style="margin-top: 40px">
+		<div class="forimage">
+			<font size="7"> A separation </font>
+			<h1> Only until ... </h1>
+			<h2> daste <i class="angle right icon"></i> zirdaste</h2>
+		</div>
+	</div>
+</div>
+
+<div class="goodmargin">
+	<div  class="ui segment" style="margin-bottom:10px">
+		<div class="ui internally celled grid">
+			<div class="row">
+				<div class="twelve wide column">
+					<div style="margin-bottom: 20px">
+						<h1> Description </h1>
+						<p>The new movie of Asghar Farhadi is a melodrama that captures the theme of responsibility
+							and honesty as well as love, religiosity, and sacrifice. The movie starts with an argument
+							for divorce between Simin (Leila Hatami) and Nader (Peyman Moaadi) before a judge in an
+							Iranian court. Through their argument, the main storyline of the movie becomes clear for
+							us so that we become aware that Nader and Simin have been planning to move to a European
+							country to provide better opportunities, as Simin claims in the court, for their only daughter,
+							Termeh (Sarina Farhadi).
+						</p>
+					</div>
+				</div>
+				<div class="four wide column">
+					<h2> Rate! </h2>
+					<div class="ui star rating" data-rating="3"></div>
+				</div>
+			</div>
+			<div class="row">
+
+				<div class="five wide column">
+					<form class="ui form">
+						<h2> Dates </h2>
+						<div class="field">
+							<label> dd/mm hour </label>
+							<select class="ui fluid search dropdown" name="dates">
+								<option value="">17/05 5:22</option>
+								<option value="1">18/05 6:00</option>
+							</select>
+						</div>
+					</form>
+				</div>
+
+				<div class="eleven wide column">
+					<form class="ui form">
+						<h2> Tickets </h2>
+						<div class="fields">
+							<div class="three wide field" >
+								<label> Tickets left: </label>
+								<div>
+									<p>7 from 80</p>
+								</div>
+							</div>
+							<div class="five wide field">
+								<label> Types of tickets </label>
+								<select class="ui fluid search dropdown" name="tickets">
+									<option value="">VIP-1900IRR</option>
+									<option value="1">Normal-100IRR</option>
+								</select>
+							</div>
+							<div class="four wide field">
+								<label> Number of tickets </label>
+								<input type="text" name="numoftickets" maxlength="5" placeholder="# of tickets">
+							</div>
+
+
+							<div class="one wide field">
+							</div>
+							<div class="four">
+								<div class="big ui button" type="submit" style="background-color: #008080;"><a onclick="window.location='/polls/buy';" style="color: white">Buy now!</a></div>
+							</div>
+						</div>
+
+					</form>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+</div>
+<script>
+
+
+  $('.dropdown').dropdown({
+    // you can use any ui transition
+    transition: 'drop'
+
+
+  })
+  $('.dropdown').dropdown({on:'hover'});
+
+	$('.rating')
+  .rating({
+    initialRating: 2,
+    maxRating: 5
+  })
+;
+</script>
+</body>
+</html>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

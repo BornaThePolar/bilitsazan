@@ -1,0 +1,41 @@
+
+    {% extends my_template %}
+
+{% block content %}
+
+<div class="ui middle aligned center aligned grid" style="margin-top: 150px">
+ <div   class="five wide column">
+ <h2 class="ui teal image header">
+ <div class="content">
+ Please Register...
+ </div>
+ </h2>
+ <form class="ui large form">
+ <div class="ui stacked segment">
+ <div class="field">
+
+
+ {% csrf_token %}
+                             {% for field in form %}
+                            <div class="form-group">
+                                {{ field.errors }}
+
+                               {{ field }}
+                            </div>
+                             {% endfor %}
+
+
+ </div>
+
+ <div class="ui fluid large teal submit button" onclick="window.location='/polls/event';" >Register </div>
+ </div>
+
+ <div class="ui error message"></div>
+
+ </form>
+
+
+ </div>
+{% endblock %}
+
+

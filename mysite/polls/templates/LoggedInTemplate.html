@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block layout %}
+    <div class="ui large top inverted fixed menu" style="background-color: #008080;">
+  <div class="ui container" >
+    <a class=" item">Home</a>
+    <div class="ui pointing dropdown link item">
+      <span class="text">Events</span>
+      <i class="dropdown i
+      con"></i>
+      <div class="menu" style="z-index: 100">
+
+
+        <div class="item"><i class="dropdown icon"></i>
+      Concert
+      <div class="menu">
+        <div class="item">Pop</div>
+        <div class="item">Rock</div>
+        <div class="item">Metal</div>
+        <div class="item">Country</div>
+        <div class="item">Classic</div>
+
+      </div></div>
+        <div class="item">Theatre</div>
+        <div class="item">Cinema</div>
+        <div class="item">Others</div>
+      </div>
+    </div>
+    <a class="item"onclick="window.location='/polls/contact';">Contact Us</a>
+    <a class="item" onclick="window.location='/polls/about';" >About US</a>
+    <div class="right menu">
+      <div class="item"><div class="ui icon input">
+  <input type="text" placeholder="Search...">
+         <i class="search icon"></i>
+</div></div>
+      <div class="item">
+        <a class="ui inverted blue basic button" onclick="window.location='/polls/report';"> <i class="user icon"></i>User Profile</a>
+      </div>
+      <div class="item">
+        <a class="ui inverted black button" onclick="window.location='/polls/login';" >Log out</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% block content %}
+{% endblock %}
+{% endblock %}

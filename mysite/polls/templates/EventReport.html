@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html dir="ltf">
+<head>
+    {%  load static %}
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properities -->
+    <title>Homepage - Semantic</title>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/reset.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/site.css"%}>
+
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/container.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/grid.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/header.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/image.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/menu.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/card.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/card.min.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/dimmer.css"%}>
+
+
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/divider.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/dropdown.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/segment.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/button.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/list.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/icon.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/sidebar.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/transition.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/shape.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/semantic.css"%}>
+
+
+
+    <style type="text/css">
+
+
+
+    </style>
+    <script src={% static "semantic/examples/assets/library/jquery.min.js"%}></script>
+    <script src={% static "semantic/dist/components/visibility.js"%}></script>
+    <script src={% static "semantic/dist/components/sidebar.js"%}></script>
+    <script src={% static "semantic/dist/components/transition.js"%}></script>
+    <script src={% static "semantic/dist/components/dimmer.js"%}></script>
+    <script src={% static "semantic/dist/semantic.min.js"%}></script>
+    <script src={% static "semantic/dist/semantic.js"%}></script>
+    <script>
+
+    </script>
+</head>
+<body>
+
+<div class="ui large top inverted fixed menu" style="background-color: #008080;">
+    <div class="ui container" >
+        <a class="item">Home</a>
+        <div class="ui pointing dropdown link item">
+            <span class="text">Events</span>
+            <i class="dropdown icon"></i>
+            <div class="menu" style="z-index: 100">
+
+
+                <div class="item"><i class="dropdown icon"></i>
+                    Concert
+                    <div class="menu">
+                        <div class="item">Pop</div>
+                        <div class="item">Rock</div>
+                        <div class="item">Metal</div>
+                        <div class="item">Country</div>
+                        <div class="item">Classic</div>
+
+                    </div></div>
+                <div class="item">Theatre</div>
+                <div class="item">Cinema</div>
+                <div class="item">Others</div>
+            </div>
+        </div>
+        <a class="item"onclick="window.location='/polls/contact';">Contact Us</a>
+        <a class="item"onclick="window.location='/polls/about';">About US</a>
+        <div class="right menu">
+            <div class="item"><div class="ui icon input">
+                <input type="text" placeholder="Search...">
+                <i class="search icon"></i>
+            </div></div>
+            <div class="item">
+                <a class="ui inverted blue basic button" onclick="window.location='/polls/report';"> <i class="user icon"></i>User Profile</a>
+            </div>
+            <div class="item">
+                <a class="ui inverted black button">Log out</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ui two column doubling grid" style="margin-top: 80px">
+
+<div class="three wide  column " style="margin-left: 50px">
+        <div class="ui vertical  menu"  >
+
+            <a class=" acitve left item">
+
+                <span>Print</span>
+            </a>
+            <a class="item">
+
+                <span>Draw Chart</span>
+            </a>
+            <a class="item">
+                Advance
+            </a>
+        </div>
+    </div>
+    <div class="twelve wide column" id="main-content" style="padding: 0px; margin-bottom: 50px">
+        <div class="ui vertical stripe segment">
+            <div class="ui middle centered aligned stackable grid container">
+                <div class="row">
+                    <div class="twelve wide column">
+                        <h2>Azadi Cinema</h2>
+                        <div class="ui divided items">
+                            <div class="item">
+                                <div class="image">
+                                    <img src={% static "image/download.jpg"%}>
+                                </div>
+                                <div class="content">
+                                    <a class="header">4tar Concert</a>
+                                    <div class="meta">
+                                        <span class="cinema">Number of Tickets: 820</span>
+
+                                    </div>
+                                    <div class="meta">
+                                        <span class="cinema">Date: 1/1/2001</span>
+                                    </div>
+                                    <div class="meta">
+                                        <span class="cinema">Money Earned: 1,232,000</span>
+                                    </div>
+                                    <div class="meta">
+                                        <span class="cineman"> Users Rate: <div class='ui star rating'><i class='active icon'></i><i class='active icon'></i><i class='active icon'></i><i class='icon'></i><i class='icon'></i></div></span>
+                                    </div>
+                                    <div class="description">
+                                        <p></p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="image">
+                                    <img src={% static "image/hMTavgm1.jpeg"%}>
+                                </div>
+                                <div class="content">
+                                    <a class="header">Game Of Thrones</a>
+                                    <div class="meta">
+                                        <span class="cinema">Money Earned: 12,213,412</span>
+                                    </div>
+                                    <div class="meta">
+                                        <span class="cinema">Date: 1/1/2001</span>
+                                    </div>
+                                    <div class="meta">
+                                        <span class="cinema">Number of Tickets: 2</span>
+                                    </div>
+                                    <div class="meta">
+                                        <span class="cineman"> Users Rate: <div class='ui star rating'><i class='active icon'></i><i class='active icon'></i><i class='active icon'></i><i class='icon'></i><i class='icon'></i></div></span>
+                                    </div>
+                                    <div class="description">
+                                        <p></p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="image">
+                                    <img src={% static "image/KSCOPE206-300.jpg"%}>
+                                </div>
+                                <div class="content">
+                                    <a class="header">Weather Systems Concert</a>
+                                    <div class="meta">
+                                        <span class="cinema">Money Earned: 1,123,143</span>
+                                    </div>
+                                    <div class="meta">
+                                        <span class="cinema">Date: 1/1/2001</span>
+                                    </div>
+                                    <div class="meta">
+                                        <span class="cinema">Number of Tickets: 2</span>
+                                    </div>
+                                    <div class="meta">
+                                        <span class="cineman"> Users Rate: <div class='ui star rating'><i class='active icon'></i><i class='active icon'></i><i class='active icon'></i><i class='icon'></i><i class='icon'></i></div></span>
+                                    </div>
+                                    <div class="description">
+                                        <p></p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+
+<div class="ui inverted vertical footer segment">
+    <div class="ui container">
+        <div class="ui stackable inverted divided equal height stackable grid">
+            <div class="three wide column">
+                <h4 class="ui inverted header">About</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Sitemap</a>
+                    <a href="#" class="item">Contact Us</a>
+                    <a href="#" class="item">Religious Ceremonies</a>
+                    <a href="#" class="item">Gazebo Plans</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header">Services</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Banana Pre-Order</a>
+                    <a href="#" class="item">DNA FAQ</a>
+                    <a href="#" class="item">How To Access</a>
+                    <a href="#" class="item">Favorite X-Men</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header">Footer Header</h4>
+                <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.dropdown').dropdown({
+        // you can use any ui transition
+        transition: 'drop'
+
+
+    })
+    $('.dropdown').dropdown({on:'hover'});
+</script>
+</body>
+
+</html>
+                    

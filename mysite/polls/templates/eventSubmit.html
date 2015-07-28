@@ -1,0 +1,86 @@
+
+
+    {% extends my_template %}
+{% block content %}
+
+    <div class="ui middle aligned center aligned grid" style="margin-top: 150px">
+        <div   class="five wide column">
+            <h2 class="ui teal image header">
+                <div class="content">
+                    Please fillout the event properties...
+                </div>
+            </h2>
+            <form class="ui large form">
+                <div class="ui stacked segment">
+                    <div class="field">
+
+
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="form-group">
+                                {{ field.errors }}
+
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+
+
+                    </div>
+
+                    <div class="ui fluid large teal submit button" >Submit </div>
+                </div>
+
+                <div class="ui error message"></div>
+
+            </form>
+
+
+        </div>
+    </div>
+    <div class="ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+            Profile Picture
+        </div>
+        <div class="content">
+            <div class="ui medium image">
+
+            </div>
+            <div class="description">
+                <div class="ui header">We've auto-chosen a profile image for you.</div>
+                <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
+                <p>Is it okay to use this photo?</p>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui black deny button">
+                Nope
+            </div>
+            <div class="ui positive right labeled icon button">
+                Yep, that's me
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
+    <script>
+        $("#id_price").keypress(function(event) {
+            // if (event.which == 13) {
+            // event.preventDefault();
+            console.log('fuck you')
+            // }
+        });
+        document.ready(function(){
+            $('.modal')
+                .modal('show')
+        })
+
+        var x = $('#id_price').text()
+        var temp='<div class'+'="form-group"><input placeholder'+'=type" type" required'+'="" type'+'="text" /></div>'+'<div class'+'="form-group"><input placeholder'+'=Number" type" required'+'="" type'+'="text" /></div>'
+        console.log(x)
+        for(var i=0;i<x;i++){
+            $('#id_price').insertAfter(temp)
+        }
+    </script>
+{% endblock %}
+
+

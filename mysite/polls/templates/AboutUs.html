@@ -1,0 +1,74 @@
+
+    {% extends my_template %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     {% load static %}
+ <meta charset="UTF-8">
+ <title></title>
+ <meta charset="utf-8" />
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+
+ <style type="text/css">
+
+ .hidden.menu {
+ display: none;
+ }
+
+
+
+
+ </style>
+
+</head>
+<body style="background-color: #00827c; margin-top: 200px" >
+
+
+ <div class="ui middle aligned center aligned grid">
+ <div class="ten wide column">
+ <h2 class="ui teal image header">
+ <div class="content">
+ About Us!
+
+ </div>
+
+ </h2>
+ <div class="ui segment">
+ پیشرفت فناوری و گسترش روزافزون استفاده از اینترنت در میان اقشار مختلف جامعه، کمکم توجه افراد به سمت خدمات ارائهشده
+از طریق اینترنت و به صورت تحت وب بیشتر شد. سهولت در ارائه و دریافت خدمات، کمرنگ شدن نقش محدودیتهای زمانی و
+مکانی و همچنین کاهش هزینهها از جمله مزایای استفاده از روشهای ارائه خدمت به صورت تحت وب است.
+با توجه به سهم مهم سرگرمی و تفریحات در زندگی افراد و همچنین جایگاه استفاده از خدمات اینترنتی، فراهمسازی بستری جهت
+دسترسی آسان و سریع از طریق اینترنت به این تفریحات میتواند تا حد خوبی توجه مخاطبین را به خود جلب نماید.
+هدف از انجام این پروژه طراحی و پیادهسازی یک سامانه تحت وب برای انجام عملیات خرید بلیط در حوزههای مختلف مانند سینما،
+تئاتر و هنر، ورزش، موسیقی و... است.
+ </div>
+ </div>
+ </div>
+
+
+ <script>
+ $('.special.cards .image').dimmer({
+ on: 'hover'
+ });
+ $('.shape').shape();
+
+
+ function flipleft(){
+ $('.shape').shape('flip left');
+ console.log('an ')
+ }
+ function flipright(){
+ $('.shape').shape('flip right');
+ }
+
+
+ </script>
+</body>
+</html>
+
+    {% endblock %}
