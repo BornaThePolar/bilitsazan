@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html dir="ltf">
+<head>
+    {%  load static %}
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properities -->
+    <title>Homepage - Semantic</title>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/reset.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/site.css"%}>
+
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/container.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/grid.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/header.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/image.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/menu.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/card.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/card.min.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/dimmer.css"%}>
+
+
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/divider.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/dropdown.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/segment.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/button.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/list.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/icon.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/sidebar.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/transition.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/components/shape.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "semantic/dist/semantic.css"%}>
+
+
+
+    <style type="text/css">
+    </style>
+    <script src={% static "semantic/examples/assets/library/jquery.min.js"%}></script>
+    <script src={% static "semantic/dist/components/visibility.js"%}></script>
+    <script src={% static "semantic/dist/components/sidebar.js"%}></script>
+    <script src={% static "semantic/dist/components/transition.js"%}></script>
+    <script src={% static "semantic/dist/components/dimmer.js"%}></script>
+    <script src={% static "semantic/dist/semantic.min.js"%}></script>
+    <script src={% static "semantic/dist/semantic.js"%}></script>
+    <script>
+    </script>
+</head>
+<body>
+
+<div class="ui large top inverted fixed menu" style="background-color: #008080;">
+    <div class="ui container" >
+        <a class="item"onclick="window.location='/polls/home';">Home</a>
+        
+		<div class="right menu">
+			<form class="ui form">
+				<div class="fields" style="margin-top: 5px">
+				<div class="ten wide field">
+					<input type="text" placeholder="Search from date" name="firstDate">
+				</div>
+				<div class="ten wide field">
+					<input type="text" placeholder="Search to date" name="secondDate">
+				</div>
+				
+				<a type="submit" class="item"onclick="window.location='/polls/;" > submit </a>
+				</div>
+			</form>
+		</div>
+		
+    </div>
+</div>
+
+
+<div class="ui two column grid" style="margin-top:20px; padding: 30px">
+  <div class="column">
+	<div class="ui container segment">
+		<form class="ui form">
+			<h4 class="ui dividing header">Event Information</h4>
+			<div class="fields">
+				<div class="ten wide field fieldWrapper">
+					{{form.subject.errors}}
+					{{form.subject.label_tag}}					
+					<div class="ui left icon input">
+						{{form.subject}}
+					</div>
+				</div>
+				<div class="four wide field fieldWrapper">
+					{{form.subject.errors}}
+					{{form.subject.label_tag}}	
+					<div class="ui left icon input">
+						{{form.subject}}
+					</div>
+				</div>
+			</div>
+			<div class="fields">
+				<div class="field fieldWrapper" id="cat">
+					{{form.subject.errors}}
+					{{form.subject.label_tag}}	
+					{{form.subject}}
+				</div>
+				<div class="field fieldWrapper">
+					{{form.subject.errors}}
+					{{form.subject.label_tag}}	
+					{{form.subject}}
+				</div>	
+			</div>
+			<div class="fields">
+				<div class="five wide field fieldWrapper">
+					{{form.subject.errors}}
+					{{form.subject.label_tag}}	
+					<div class="ui left icon input">
+							{{form.subject}}
+					</div>
+				</div>
+				<div class="field">
+					<label>zer </label>
+					<div class="ui button" type="submit" style="background-color: #008080; color: white">Add More Date</div>
+				</div>
+			</div>
+			<div class="field fieldWrapper">
+				{{form.subject.errors}}
+				{{form.subject.label_tag}}	
+				<textarea>
+					{{form.subject}}
+				</textarea>
+			</div>
+			<div class="fields">
+				<div class="field fieldWrapper">
+					{{form.subject.errors}}
+					{{form.subject.label_tag}}	
+					<div class="ui left icon input">
+						{{form.subject}}
+					</div>					
+				</div>
+				<div class="field fieldWrapper">
+					{{form.subject.errors}}
+					{{form.subject.label_tag}}	
+					<div class="ui left icon input">
+						{{form.subject}}
+					</div>					
+				</div>
+				
+			</div>
+			<div class="ui button" type="submit" style="background-color: #008080; color: white">Add More Types</div>
+			<div class="ui action input" style="margin-bottom:10px; margin-top:10px">
+				<input type="text" value="/C:">
+				<button class="ui teal right labeled icon button">
+					<i class="copy icon"></i>
+					Upload photo
+				</button>
+			</div>
+			 
+			<div class="ui button" type="submit" style="background-color: #008080; color: white">Save</div>
+			<div class="ui button" type="submit">Discard</div>
+		</form>
+	</div>
+  </div>
+  <div class="ui vertical divider">
+  </div>
+
+
+    <div class="column" id="main-content" style="margin-bottom: 50px">
+	
+        <div class="ui vertical stripe segment">
+            <div class="ui container segment" >
+                <div class="row">
+                    <div class="twelve wide column">
+                        <h2>Events</h2>
+                        <div class="ui divided items">
+							{% for event in event_list %}
+                            <div class="item">
+                                <div class="image">
+                                    <img src={% static event.photo%}>
+                                </div>
+                                <div class="content">
+                                    <a class="header">{{event.subject}}</a>
+                                    <div class="meta">
+                                        <span class="cinema">Tickets sold: {{event.ticketsSold}}</span>
+
+                                    </div>
+									<div class="meta">
+										<span class="cinema"> Tickets left: {{event.ticketsLeft}}</span>
+									</div>
+                                    <div class="meta">
+                                        <span class="cinema">Date: {{event.date}}</span>
+                                    </div>
+                                    <div class="meta">
+                                        <span class="cinema">Money Earned: {{event.income}}</span>
+                                    </div>
+                                    <div class="meta">
+                                        <span class="cinema"> Users Rate: <div class='ui star rating'><i class='active icon'></i><i class='active icon'></i><i class='active icon'></i><i class='icon'></i><i class='icon'></i></div></span>
+                                    </div>
+									<a class="ui button" style="background-color: #008080; color: white" href="polls/manage/{{ event.id }}/">Edit Event</a>
+									<a class="ui button" href="/polls/delete/{{event.id}}/">Remove</a>
+
+                                </div>
+                            </div>
+							{% endfor%}
+                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+  
+
+
+</div>
+
+
+
+<div class="ui inverted vertical footer segment">
+    <div class="ui container">
+        <div class="ui stackable inverted divided equal height stackable grid">
+            <div class="three wide column">
+                <h4 class="ui inverted header">About</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Sitemap</a>
+                    <a href="#" class="item">Contact Us</a>
+                    <a href="#" class="item">Religious Ceremonies</a>
+                    <a href="#" class="item">Gazebo Plans</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header">Services</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Banana Pre-Order</a>
+                    <a href="#" class="item">DNA FAQ</a>
+                    <a href="#" class="item">How To Access</a>
+                    <a href="#" class="item">Favorite X-Men</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header">Footer Header</h4>
+                <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.dropdown').dropdown({
+        // you can use any ui transition
+        transition: 'drop'
+    })
+    $('.dropdown').dropdown({on:'hover'});
+</script>
+<script>
+ var sub_cats = {{ sub_cats_list }};
+
+ $('#cat select').change(function () {
+ var optionSelected = $("option:selected", this);
+ var valueSelected = this.value;
+
+ $(this).empty();
+ $.each(sub_cats[valueSelected], function (value, key) {
+ $(this).append($("<option></option>").attr("value", value).text(key));
+ });
+ });
+</script>
+</body>
+
+</html>

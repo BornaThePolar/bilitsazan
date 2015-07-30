@@ -29,6 +29,7 @@ class Event(models.Model):
     user=models.ForeignKey('UserProfile')
     date=models.DateField()
     ticketsLeft=models.IntegerField()
+    ticketsSold=models.IntegerField()
     category = models.ForeignKey('Category')
     subCategory = models.ForeignKey('SubCategory')
     description= models.TextField()

@@ -15,6 +15,8 @@ def eventSubmit(request):
     return render(request, 'eventSubmit.html',context)
 
 
+
+
 def buy(request):
     context = {'my_template': 'NotLoggedIn.html'}
     return render(request,'buy.html',context)
@@ -27,6 +29,8 @@ def login(request):
 
     return render(request, 'Login.html', { 'my_template': 'LoggedInTemplate.html'})
 
+def manage(request):
+    return render(request, 'modiriat.html', {'my_template': 'NotLoggedIn.html'})
 
 
     """  error=None
@@ -45,12 +49,10 @@ def login(request):
 
 
 def main(request):
-
     context = {'my_template': 'NotLoggedIn.html'}
     return render(request,'MainPage.html',context)
 
 def home(request):
-
     context = {'my_template': 'NotLoggedIn.html'}
     return render(request,'homepage.html',context)
 
@@ -63,12 +65,10 @@ def report(request):
     return render(request,'Report.html',context)
 
 def contact(request):
-
     context = {'my_template': 'NotLoggedIn.html'}
     return render(request,'contact.html',context)
 
-def eventReport(request):
-
+def event_report(request):
     context = {'my_template': 'NotLoggedIn.html'}
     return render(request,'EventReport.html',context)
 

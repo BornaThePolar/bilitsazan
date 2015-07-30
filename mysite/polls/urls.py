@@ -14,8 +14,8 @@ urlpatterns = [
      url(r'^event/$', views.event, name='event'),
       url(r'^report/$', views.report, name='report'),
       url(r'^contact/$', views.contact, name='contact'),
-    url(r'^eventreport/$', views.eventReport, name='contact'),
-
+    url(r'^eventreport/$', views.event_report, name='contact'),
+    url(r'^manage/$', views.manage, name='manage')
 
 
 
