@@ -17,7 +17,9 @@ urlpatterns = [
     url(r'^eventreport/$', views.event_report, name='contact'),
     url(r'^manage/$', views.manage, name='manage'),
     url(r'^addSubCategory/(?P<subcategory_name>\w+)/(?P<subcategory_id>\d+)/$', views.AddSubCategory, name='AddSubCategory'),
-    url(r'^addCategory/(?P<category_name>\w+)/$', views.AddCategory, name='AddCategory')
+    url(r'^addCategory/(?P<category_name>\w+)/$', views.AddCategory, name='AddCategory'),
+    url(r'^removeSubCategory/(?P<subcategory_id>\d+)/$', views.RemoveSubCategory, name='RemoveSubCategory'),
+    url(r'^removeCategory/(?P<category_id>\d+)/$', views.RemoveCategory, name='RemoveCategory'),
 
 
 

@@ -89,3 +89,18 @@ def AddSubCategory(request,subcategory_name, subcategory_id):
     newSubCat.daste=category
     newSubCat.save()
     return HttpResponseRedirect('/manage/')
+
+def RemoveCategory(request, category_id):
+    category=Category.objects.filter(id=category_id)[0]
+    subcategory=SubCategory.objects.filter(daste=category)
+    for subcat in subcategory:
+        subcat.delete()
+    if category is not None:
+        category.delete()
+    return HttpResponseRedirect('/manage/')
+
+def RemoveSubCategory(request, subcategory_id):
+    subcat = SubCategory.objects.filter(id=subcategory_id)[0]
+    if subcat is not None:
+        subcat.delete()
+    return HttpResponseRedirect('/manage/')

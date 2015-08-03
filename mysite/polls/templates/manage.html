@@ -146,7 +146,7 @@
                         <div class="ui vertical stripe segment">
                             <div class="ui middle centered aligned stackable grid container">
                                 <div class="row">
-                                    <button class="ui labeled icon red button">
+                                    <button class="ui labeled icon red button" onclick="window.location='/removeCategory/'+{{ category.id }};">
                                         <i class="remove icon"></i>
                                         Remove
                                     </button>
@@ -163,7 +163,7 @@
                                                 {% if subcat.daste == category %}
                                             <div class="item">
                                                 <div class="content">{{ subcat.name }}</div>
-                                                <button class="ui right floated labeled icon red button">
+                                                <button class="ui right floated labeled icon red button" onclick="window.location='/removeSubCategory/'+{{ subcat.id }};">
                                                     <i class="remove icon"></i>
                                                     Remove
                                                 </button>
