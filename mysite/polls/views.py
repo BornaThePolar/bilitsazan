@@ -30,7 +30,7 @@ def login(request):
     return render(request, 'Login.html', { 'my_template': 'LoggedInTemplate.html'})
 
 def manage(request):
-    return render(request, 'manage.html', {'my_template': 'LoggedInTemplate.html'})
+    return render(request, 'modiriat.html', {'my_template': 'NotLoggedIn.html'})
 
 
     """  error=None
