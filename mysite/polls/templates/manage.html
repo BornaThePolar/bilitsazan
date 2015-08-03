@@ -129,7 +129,7 @@
             <div class="ui vertical stripe segment">
                 <div class="ui middle centered aligned stackable grid container">
                     <div class="row">
-                        <button class="ui labeled icon green button" onclick="showModal()">
+                        <button class="ui labeled icon green button" onclick="showModal({{ category.id }})">
                             <i class="plus icon"></i>
                             Add Category
                         </button>
@@ -181,7 +181,7 @@
             </div>
         </div>
     </div>
-
+<input type="hidden" id="hidden">
     <div id="cat" class="ui modal">
         <i class="close icon"></i>
 
@@ -194,7 +194,7 @@
 
         </div>
         <div class="actions">
-            <div  class="ui positive right labeled icon button" onclick="window.location='/addCategory';">
+            <div  class="ui positive right labeled icon button" onclick="window.location='/addCategory/{{ category.id }}';">
                 Submit
                 <i class="checkmark icon"> </i>
             </div>
@@ -213,7 +213,7 @@
 
         </div>
         <div class="actions">
-            <div  class="ui positive right labeled icon button" onclick="window.location='/addSubCategory';">
+            <div  class="ui positive right labeled icon button" onclick="window.location='/addSubCategory/';">
                 Submit
                 <i class="checkmark icon"> </i>
             </div>
@@ -225,7 +225,8 @@
         $('.menu .item')
                 .tab()
         ;
-        function showModal(){
+        function showModal(id){
+            $('#hidden').val(id)
             $('#cat')
                     .modal('show')
             ;
