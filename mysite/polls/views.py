@@ -75,6 +75,17 @@ def event_report(request):
     context = {'my_template': 'NotLoggedIn.html'}
     return render(request,'EventReport.html',context)
 
-def AddCategory(request):
-    if request.method=='GET':
-        pass
+def AddCategory(request,category_name):
+    newCategory = Category()
+    newCategory.name=category_name
+    newCategory.save()
+    print('hello')
+    return HttpResponseRedirect('/manage/')
+
+def AddSubCategory(request,subcategory_name, subcategory_id):
+    newSubCat= SubCategory()
+    newSubCat.name=subcategory_name
+    category = Category.objects.filter(id=subcategory_id)[0]
+    newSubCat.daste=category
+    newSubCat.save()
+    return HttpResponseRedirect('/manage/')

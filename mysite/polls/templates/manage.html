@@ -129,7 +129,7 @@
             <div class="ui vertical stripe segment">
                 <div class="ui middle centered aligned stackable grid container">
                     <div class="row">
-                        <button class="ui labeled icon green button" onclick="showModal({{ category.id }})">
+                        <button class="ui labeled icon green button" onclick="showModal()">
                             <i class="plus icon"></i>
                             Add Category
                         </button>
@@ -150,7 +150,7 @@
                                         <i class="remove icon"></i>
                                         Remove
                                     </button>
-                                    <button class="ui labeled icon green button" onclick="showModalSub()">
+                                    <button class="ui labeled icon green button" onclick="showModalSub({{ category.id }})">
                                         <i class="plus icon"></i>
                                         Add Subcategory
                                     </button>
@@ -182,6 +182,7 @@
         </div>
     </div>
 <input type="hidden" id="hidden">
+    <input type="hidden" id="name">
     <div id="cat" class="ui modal">
         <i class="close icon"></i>
 
@@ -189,12 +190,12 @@
         <div class="ui form" style="margin: 30px;">
             <div class="field">
 
-                <input type="text" name="name" placeholder="Name">
+                <input id="catname" type="text" name="name" placeholder="Name">
             </div>
 
         </div>
         <div class="actions">
-            <div  class="ui positive right labeled icon button" onclick="window.location='/addCategory/{{ category.id }}';">
+            <div  class="ui positive right labeled icon button" id="categorySubmit" >
                 Submit
                 <i class="checkmark icon"> </i>
             </div>
@@ -208,12 +209,12 @@
         <div class="ui form" style="margin: 30px;">
             <div class="field">
 
-                <input type="text" name="name" placeholder="Name">
+                <input id="subcatname" type="text" name="name" placeholder="Name">
             </div>
 
         </div>
         <div class="actions">
-            <div  class="ui positive right labeled icon button" onclick="window.location='/addSubCategory/';">
+            <div  class="ui positive right labeled icon button" id="subcategorySubmit" >
                 Submit
                 <i class="checkmark icon"> </i>
             </div>
@@ -225,18 +226,25 @@
         $('.menu .item')
                 .tab()
         ;
-        function showModal(id){
-            $('#hidden').val(id)
+
+    })
+    $('#categorySubmit').on('click',function(){
+        window.location='/addCategory/'+$('#catname').val()
+    })
+    $('#subcategorySubmit').on('click',function(){
+        window.location='/addSubCategory/'+$('#subcatname').val()+'/'+$('#hidden').val()
+    })
+    function showModal(){
             $('#cat')
                     .modal('show')
             ;
         }
-        function showModalSub(){
+        function showModalSub(id){
+            $('#hidden').val(id)
+            console.log(id)
             $('#subCat')
                     .modal('show')
             ;
         }
-    })
-
     </script>
 {% endblock %}
