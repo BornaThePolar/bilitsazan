@@ -12,7 +12,10 @@ def register(request):
 
 
 def eventSubmit(request):
-    context = {'my_template': 'NotLoggedIn.html'}
+    form = EventSubmit(request.POST or None)
+    category = Category.objects.all()
+    subcategory= SubCategory.objects.all()
+    context = {'my_template': 'NotLoggedIn.html', 'category': category, 'subcategory': subcategory}
     return render(request, 'eventSubmit.html',context)
 
 
