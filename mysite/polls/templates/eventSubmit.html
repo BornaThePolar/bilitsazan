@@ -42,7 +42,7 @@
 
 
                             <select id="id_subgroup" name="subgroup">
-                                <option value="" selected="selected">subgroup</option>
+
 
 
                             </select>
@@ -105,6 +105,7 @@
 
             {% endfor %}
     var value=1;
+        $('#id_subgroup').text('')
         for(var subcat in subcats){
             if(subcats[subcat]===temp){
                 var temp2='<option value="'+value+'">'+ subcat+'</option>'
