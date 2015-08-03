@@ -1,4 +1,5 @@
 from django import forms
+from polls.models import Event
 
 
 class Register(forms.Form):
@@ -24,5 +25,10 @@ class EventSubmit(forms.Form):
     comments= forms.CharField(widget=forms.Textarea)
 
     image = forms.ImageField()
+
+class EventForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = ('subject', 'description', 'category', 'subCategory', 'photo', 'date', 'finishDate', 'ticketsLeft', 'price')
 
 

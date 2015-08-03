@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from polls.forms import EventForm
 from polls.models import Category,SubCategory
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
@@ -12,10 +13,25 @@ def register(request):
 
 
 def eventSubmit(request):
-    form = EventSubmit(request.POST or None)
-    category = Category.objects.all()
-    subcategory= SubCategory.objects.all()
-    context = {'my_template': 'NotLoggedIn.html', 'category': category, 'subcategory': subcategory}
+    sub_cats_list = {}
+    for cat in Category.objects.all():
+        l = {}
+        subcats = cat.subcategory_set.all()
+        for s in subcats:
+            l[s.id] = str(s.name)
+        sub_cats_list[cat.id] = l
+
+    if request.method == 'POST':
+        form = EventForm(request.POST, request.FILES)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.user_id = request.user.userprofile.id
+            event.save()
+            return HttpResponseRedirect('/manage/')
+    else:
+        form = EventForm()
+
+    context = {'form': form, 'my_template': 'LoggedInTemplate.html', 'sub_cats_list': sub_cats_list}
     return render(request, 'eventSubmit.html',context)
 
 

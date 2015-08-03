@@ -29,16 +29,16 @@ class Event(models.Model):
     user=models.ForeignKey('UserProfile')
     date=models.DateField()
     ticketsLeft=models.IntegerField()
-    ticketsSold=models.IntegerField()
+    ticketsSold=models.IntegerField(default=0)
     category = models.ForeignKey('Category')
     subCategory = models.ForeignKey('SubCategory')
     description= models.TextField()
     subject=models.CharField(max_length=32)
     finishDate=models.DateField()
     price=models.IntegerField()
-    photo = models.FileField(upload_to='static/Photos/Users/')
-    scoredUsers = models.ForeignKey('Scorers')
-    score=models.FloatField()
+    photo = models.FileField(upload_to='event_photoes/')
+    scoredUsers = models.ForeignKey('Scorers', null=True)
+    score=models.FloatField(default=0)
 
 class Scorers(models.Model):
     scorers= models.ManyToManyField('UserProfile')
@@ -53,9 +53,16 @@ class Comment(models.Model):
 class Category(models.Model):
     name=models.CharField(max_length=32)
 
+    def __unicode__(self):
+        return self.name
+
 class SubCategory(models.Model):
     name=models.CharField(max_length=32)
     daste=models.ForeignKey('Category')
+
+    def __unicode__(self):
+        return self.name
+
 
 class Likers(models.Model):
     user=models.ManyToManyField('UserProfile')

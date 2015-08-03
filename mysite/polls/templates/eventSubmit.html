@@ -1,6 +1,6 @@
 
 
-{% extends my_template %}
+    {% extends my_template %}
 {% block content %}
 
     <div class="ui middle aligned center aligned grid" style="margin-top: 150px">
@@ -10,81 +10,16 @@
                     Please fillout the event properties...
                 </div>
             </h2>
-            <form class="ui large form">
-                <div class="ui stacked segment">
+            <form class="ui large form" action="." method="post" enctype="multipart/form-data">
+                <div class="ui stacked left aligned segment">
                     <div class="field">
 
-
-                        <input type='hidden' name='csrfmiddlewaretoken' value='3XDltuzJapu0UbkfLaPvnu8LWMZnjI0q' />
-
-                        <div class="form-group">
-
-
-                            <input id="id_subject" maxlength="32" name="subject" placeholder="subject" required="" type="text" />
-                        </div>
-
-                        <div class="form-group">
-
-
-                            <select id="id_group" name="group">
-                                <option value="" selected="selected">group</option>
-
-                                {% for category in category %}
-                                <option value={{ forloop.counter }}>{{ category.name }}</option>
-
-
-                                {% endfor %}
-
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-
-
-                            <select id="id_subgroup" name="subgroup">
-
-
-
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-
-
-                            <input id="date" name="date" type="date" />
-                        </div>
-                        <div class="form-group">
-
-
-                            <input id="location" placeholder="location" name="location" type="text" />
-                        </div>
-
-                        <div class="form-group">
-
-
-                            <input id="id_ticketNumber" name="ticketNumber" placeholder=" ticket number" required="" type="text" />
-                        </div>
-                        <div id="ticketNo" class="form-group" >
-
-                        </div>
-                        <div class="form-group">
-
-
-                                <textarea cols="40" id="id_comments" placeholder="description" name="description" rows="10">
-</textarea>
-                        </div>
-
-                        <div class="form-group">
-
-
-                            <input id="id_image" name="image" type="file" />
-                        </div>
-
-
+                        {% csrf_token %}
+                        {{ form.as_p }}
 
                     </div>
 
-                    <div class="ui fluid large teal submit button" >Submit </div>
+                    <input type="submit" class="ui fluid large teal submit button" >
                 </div>
 
                 <div class="ui error message"></div>
@@ -92,59 +27,67 @@
             </form>
 
 
-
         </div>
     </div>
-    <input type="hidden" id="hidden" >
-    <script>
-    $('#id_group').change(function(){
-    var temp=$('#id_group :selected').text()
-    var subcats={}
-            {% for subcat in subcategory %}
-                subcats['{{ subcat.name }}']='{{ subcat.daste.name }}'
+    <div class="ui modal">
+        <i class="close icon"></i>
+        <div class="header">
+            Profile Picture
+        </div>
+        <div class="content">
+            <div class="ui medium image">
 
-            {% endfor %}
-    var value=1;
-        $('#id_subgroup').text('')
-        for(var subcat in subcats){
-            if(subcats[subcat]===temp){
-                var temp2='<option value="'+value+'">'+ subcat+'</option>'
-                $('#id_subgroup').append(temp2)
-            }
-            value++;
-        }
-    })
-        $('#id_group').val()
-        $('#id_ticketNumber').keypress(function(event){
-            if(event.keyCode >=48 && event.keyCode<=57){
-                $('#ticketNo').text('')
-                for(var i=0;i<event.keyCode-48;i++){
-                    console.log('hi')
-                    var temp='<input  name="'+i+'type" placeholder=" ticket type" required="true" type="text" /><input  name="'+i+'ticketNumber" placeholder=" price" required="true" type="text" />'
-                    $('#ticketNo').append(temp)
-                }
-            }
-        })
-        function ticketNo(){
-            $('#hidden')
-        }
+            </div>
+            <div class="description">
+                <div class="ui header">We've auto-chosen a profile image for you.</div>
+                <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
+                <p>Is it okay to use this photo?</p>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="ui black deny button">
+                Nope
+            </div>
+            <div class="ui positive right labeled icon button">
+                Yep, that's me
+                <i class="checkmark icon"></i>
+            </div>
+        </div>
+    </div>
+    <script>
         $("#id_price").keypress(function(event) {
             // if (event.which == 13) {
             // event.preventDefault();
             console.log('fuck you')
             // }
         });
-        $(document).ready(function(){
+        document.ready(function(){
             $('.modal')
-                    .modal('show')
+                .modal('show')
         })
 
-      //  var x = $('#id_price').text()
-      //  var temp='<div class'+'="form-group"><input placeholder'+'=type" type" required'+'="" type'+'="text"  style="width: 120px; display: inline"/></div>'+'<div class'+'="form-group"><input placeholder'+'=Number" type" required'+'="" type'+'="text" style="width: 120px; display: inline"/></div>'
-      //  console.log(x)
-     //   for(var i=0;i<x;i++){
-       //     $('#id_price').append(temp)
-      //  })
+        var x = $('#id_price').text()
+        var temp='<div class'+'="form-group"><input placeholder'+'=type" type" required'+'="" type'+'="text" /></div>'+'<div class'+'="form-group"><input placeholder'+'=Number" type" required'+'="" type'+'="text" /></div>'
+        console.log(x)
+        for(var i=0;i<x;i++){
+            $('#id_price').insertAfter(temp)
+        }
+
+
+
+
+        </script>
+    <script>
+            var sub_cats = {{ sub_cats_list | safe }};
+        $('select#id_category').change(function () {
+            var optionSelected = $("option:selected", this);
+            var valueSelected = this.value;
+
+            $('select#id_subCategory').empty();
+            $.each(sub_cats[valueSelected], function (value, key) {
+                $('select#id_subCategory').append($("<option></option>").attr("value", value).text(key));
+            });
+        });
     </script>
 {% endblock %}
 
