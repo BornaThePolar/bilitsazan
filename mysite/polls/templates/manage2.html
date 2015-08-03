@@ -5,6 +5,7 @@
         <div class="ui top attached tabular menu">
             <a class="item active" data-tab="first">Events</a>
             <a class="item" data-tab="second">Categories</a>
+
         </div>
         <div class="ui bottom attached tab segment active" data-tab="first">
             <div class="ui vertical stripe segment">
@@ -135,14 +136,13 @@
                         </button>
                     </div>
                     <div class="ui top attached tabular menu">
-                        {% for category in category %}
-                            {% if category.id == 1 %}<a class="item active" data-tab={{ category.id }}>{{ category.name }} </a>{% endif %}
-                            {% if category.id != 1 %}<a class="item " data-tab={{ category.id }}>{{ category.name }} </a>{% endif %}
-                        {% endfor %}
+                        <a class="item active" data-tab="1">Concert</a>
+                        <a class="item" data-tab="2">Cinema</a>
+                        <a class="item" data-tab="3">Theatre</a>
+
                     </div>
-                    {% for category in category %}
-                        {% if category.id == 1 %}<div class="ui bottom attached tab segment active" data-tab={{ category.id }}>{% endif %}
-                        {% if category.id != 1 %}<div class="ui bottom attached tab segment " data-tab={{ category.id }}>{% endif %}
+
+                    <div class="ui bottom attached tab segment active" data-tab="1">
                         <div class="ui vertical stripe segment">
                             <div class="ui middle centered aligned stackable grid container">
                                 <div class="row">
@@ -159,29 +159,82 @@
                                     <div class="twelve wide column">
                                         <h2>SubCategories</h2>
                                         <div class="ui divided items">
-                                            {% for subcat in subcategory %}
-                                                {% if subcat.daste == category %}
                                             <div class="item">
-                                                <div class="content">{{ subcat.name }}</div>
+                                                <div class="content">Pop</div>
                                                 <button class="ui right floated labeled icon red button">
                                                     <i class="remove icon"></i>
                                                     Remove
                                                 </button>
                                             </div>
-                                                {% endif %}
-                                                {% endfor %}
+                                            <div class="item">
+                                                <div class="content">Rock</div>
+                                                <button class="ui right floated labeled icon red button">
+                                                    <i class="remove icon"></i>
+                                                    Remove
+                                                </button>
+                                            </div>
+                                            <div class="item">
+                                                <div class="content">Classic</div>
+                                                <button class="ui right floated labeled icon red button">
+                                                    <i class="remove icon"></i>
+                                                    Remove
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> </div> </div>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="2">
+                        <div class="ui vertical stripe segment">
+                            <div class="ui middle centered aligned stackable grid container">
+                                <div class="row">
+                                    <button class="ui labeled icon red button">
+                                        <i class="remove icon"></i>
+                                        Remove
+                                    </button>
+                                    <button class="ui labeled icon green button">
+                                        <i class="plus icon"></i>
+                                        Add Subcategory
+                                    </button>
+                                </div>
+                                <div class="row">
+                                    <div class="twelve wide column">
+                                        <h2>SubCategories</h2>
+                                        <div class="ui divided items">
+                                            <div class="item">
+                                                <div class="content">Comedy</div>
+                                                <button class="ui right floated labeled icon red button">
+                                                    <i class="remove icon"></i>
+                                                    Remove
+                                                </button>
+                                            </div>
+                                            <div class="item">
+                                                <div class="content">Action</div>
+                                                <button class="ui right floated labeled icon red button">
+                                                    <i class="remove icon"></i>
+                                                    Remove
+                                                </button>
+                                            </div>
+                                            <div class="item">
+                                                <div class="content">Sci-Fi</div>
+                                                <button class="ui right floated labeled icon red button">
+                                                    <i class="remove icon"></i>
+                                                    Remove
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
                 </div>
             </div>
         </div>
     </div>
+    </div>
 
+    </div>
     <div id="cat" class="ui modal">
         <i class="close icon"></i>
 
@@ -221,7 +274,6 @@
 
     </div>
     <script>
-    $(document).ready(function(){
         $('.menu .item')
                 .tab()
         ;
@@ -235,7 +287,5 @@
                     .modal('show')
             ;
         }
-    })
-
     </script>
 {% endblock %}

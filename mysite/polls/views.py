@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from polls.models import Category,SubCategory
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 
@@ -30,7 +31,9 @@ def login(request):
     return render(request, 'Login.html', { 'my_template': 'LoggedInTemplate.html'})
 
 def manage(request):
-    return render(request, 'manage.html', {'my_template': 'LoggedInTemplate.html'})
+    category = Category.objects.all()
+    subcat = SubCategory.objects.all()
+    return render(request, 'manage.html', {'my_template': 'LoggedInTemplate.html', 'category': category, 'subcategory': subcat})
 
 
     """  error=None
@@ -72,3 +75,6 @@ def event_report(request):
     context = {'my_template': 'NotLoggedIn.html'}
     return render(request,'EventReport.html',context)
 
+def AddCategory(request):
+    if request.method=='GET':
+        pass
