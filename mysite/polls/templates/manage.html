@@ -1,0 +1,269 @@
+{% extends my_template %}
+{% block content %}
+    {% load static %}
+    <div style="margin-top: 80px; margin-left: 60px; margin-right: 60px">
+        <div class="ui top attached tabular menu">
+            <a class="item active" data-tab="first">Events</a>
+            <a class="item" data-tab="second">Categories</a>
+
+        </div>
+        <div class="ui bottom attached tab segment active" data-tab="first">
+            <div class="ui vertical stripe segment">
+                <div class="ui middle centered aligned stackable grid container">
+                    <div class="row">
+                        <button class="ui labeled icon green button">
+                            <i class="plus icon"></i>
+                            Add event
+                        </button>
+                    </div>
+                    <div class="row">
+                        <div class="twelve wide column">
+                            <h2>Purchased Events</h2>
+                            <div class="ui divided items">
+                                <div class="item">
+                                    <div class="image">
+                                        <img src={% static "image/download.jpg"%}>
+                                    </div>
+                                    <div class="content">
+                                        <a class="header">4tar Concert</a>
+                                        <div class="meta">
+                                            <span class="cinema">Azadi Cinema</span>
+
+                                        </div>
+                                        <div class="meta">
+                                            <span class="cinema">Date: 1/1/2001</span>
+                                        </div>
+                                        <div class="meta">
+                                            <span class="cinema">Number of Tickets: 2</span>
+                                        </div>
+                                        <div class="description">
+                                            <p></p>
+                                        </div>
+                                        <div class="extra">
+                                            <button class="ui right floated labeled icon red button">
+                                                <i class="remove icon"></i>
+                                                Remove
+                                            </button>
+                                        </div>
+                                        <div class="extra">
+                                            <button class="ui right floated labeled icon blue button">
+                                                <i class="edit icon"></i>
+                                                Edit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="image">
+                                        <img src={% static "image/hMTavgm1.jpeg"%}>
+                                    </div>
+                                    <div class="content">
+                                        <a class="header">Game Of Thrones</a>
+                                        <div class="meta">
+                                            <span class="cinema">HassanGholi Cinema</span>
+                                        </div>
+                                        <div class="meta">
+                                            <span class="cinema">Date: 1/1/2001</span>
+                                        </div>
+                                        <div class="meta">
+                                            <span class="cinema">Number of Tickets: 2</span>
+                                        </div>
+                                        <div class="description">
+                                            <p></p>
+                                        </div>
+                                        <div class="extra">
+                                            <div class="ui right floated primary button">
+                                                1000T
+                                            </div>
+                                        </div>
+                                        <div class="extra">
+                                            <div class="ui right floated primary button">
+                                                1000T
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="image">
+                                        <img src={% static "image/KSCOPE206-300.jpg"%}>
+                                    </div>
+                                    <div class="content">
+                                        <a class="header">Weather Systems Concert</a>
+                                        <div class="meta">
+                                            <span class="cinema">IFC</span>
+                                        </div>
+                                        <div class="meta">
+                                            <span class="cinema">Date: 1/1/2001</span>
+                                        </div>
+                                        <div class="meta">
+                                            <span class="cinema">Number of Tickets: 2</span>
+                                        </div>
+                                        <div class="description">
+                                            <p></p>
+                                        </div>
+                                        <div class="extra">
+                                            <div class="ui right floated primary button">
+                                                1,200T
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="ui bottom attached tab segment" data-tab="second">
+            <div class="ui vertical stripe segment">
+                <div class="ui middle centered aligned stackable grid container">
+                    <div class="row">
+                        <button class="ui labeled icon green button">
+                            <i class="plus icon"></i>
+                            Add Category
+                        </button>
+                    </div>
+                    <div class="ui top attached tabular menu">
+                        <a class="item active" data-tab="1">Concert</a>
+                        <a class="item" data-tab="2">Cinema</a>
+                        <a class="item" data-tab="3">Theatre</a>
+
+                    </div>
+
+                    <div class="ui bottom attached tab segment active" data-tab="1">
+            <div class="ui vertical stripe segment">
+                <div class="ui middle centered aligned stackable grid container">
+                    <div class="row">
+                        <button class="ui labeled icon red button">
+                            <i class="remove icon"></i>
+                            Remove
+                        </button>
+                        <button class="ui labeled icon green button">
+                            <i class="plus icon"></i>
+                            Add Subcategory
+                        </button>
+                    </div>
+                    <div class="row">
+                        <div class="twelve wide column">
+                            <h2>SubCategories</h2>
+                            <div class="ui divided items">
+                                <div class="item">
+                                <div class="content">Pop</div>
+                                <button class="ui right floated labeled icon red button">
+                                    <i class="remove icon"></i>
+                                    Remove
+                                </button>
+                            </div>
+                                <div class="item">
+                                <div class="content">Rock</div>
+                                <button class="ui right floated labeled icon red button">
+                                    <i class="remove icon"></i>
+                                    Remove
+                                </button>
+                            </div>
+                                <div class="item">
+                                <div class="content">Classic</div>
+                                <button class="ui right floated labeled icon red button">
+                                    <i class="remove icon"></i>
+                                    Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                        </div> </div> </div>
+                            </div>
+                    <div class="ui bottom attached tab segment" data-tab="2">
+                        <div class="ui vertical stripe segment">
+                <div class="ui middle centered aligned stackable grid container">
+                    <div class="row">
+                        <button class="ui labeled icon red button">
+                            <i class="remove icon"></i>
+                            Remove
+                        </button>
+                        <button class="ui labeled icon green button">
+                            <i class="plus icon"></i>
+                            Add Subcategory
+                        </button>
+                    </div>
+                    <div class="row">
+                        <div class="twelve wide column">
+                            <h2>SubCategories</h2>
+                            <div class="ui divided items">
+                                <div class="item">
+                                <div class="content">Comedy</div>
+                                <button class="ui right floated labeled icon red button">
+                                    <i class="remove icon"></i>
+                                    Remove
+                                </button>
+                            </div>
+                                <div class="item">
+                                <div class="content">Action</div>
+                                <button class="ui right floated labeled icon red button">
+                                    <i class="remove icon"></i>
+                                    Remove
+                                </button>
+                            </div>
+                                <div class="item">
+                                <div class="content">Sci-Fi</div>
+                                <button class="ui right floated labeled icon red button">
+                                    <i class="remove icon"></i>
+                                    Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                        </div> </div> </div>
+                            </div>
+                    <div class="ui bottom attached tab segment" data-tab="3">
+                        <div class="ui vertical stripe segment">
+                <div class="ui middle centered aligned stackable grid container">
+                    <div class="row">
+                        <button class="ui labeled icon red button">
+                            <i class="remove icon"></i>
+                            Remove
+                        </button>
+                        <button class="ui labeled icon green button">
+                            <i class="plus icon"></i>
+                            Add Subcategory
+                        </button>
+                    </div>
+                    <div class="row">
+                        <div class="twelve wide column">
+                            <h2>SubCategories</h2>
+                            <div class="ui divided items">
+                                <div class="item">
+                                <div class="content">Comedy</div>
+                                <button class="ui right floated labeled icon red button">
+                                    <i class="remove icon"></i>
+                                    Remove
+                                </button>
+                            </div>
+                                <div class="item">
+                                <div class="content">Romance</div>
+                                <button class="ui right floated labeled icon red button">
+                                    <i class="remove icon"></i>
+                                    Remove
+                                </button>
+                            </div>
+                                
+                        </div>
+                    </div>
+                        </div> </div> </div>
+                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    </div>
+    <script>
+        $('.menu .item')
+                .tab()
+        ;
+    </script>
+{% endblock %}
