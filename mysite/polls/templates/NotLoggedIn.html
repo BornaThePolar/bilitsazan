@@ -9,19 +9,21 @@
       <div class="menu" style="z-index: 100">
 
 
-        <div class="item"><i class="dropdown icon"></i>
-      Concert
-      <div class="menu">
-        <div class="item">Pop</div>
-        <div class="item">Rock</div>
-        <div class="item">Metal</div>
-        <div class="item">Country</div>
-        <div class="item">Classic</div>
+       <i class="dropdown icon"></i>
+             {% for category in categories %}
 
-      </div></div>
-        <div class="item">Theatre</div>
-        <div class="item">Cinema</div>
-        <div class="item">Others</div>
+                 <div class="item">
+                 {{ category.name }}
+                <div class="menu">
+                    {% for subcat in subcats %}
+                        {% if subcat.daste == category %}
+                            <div class="item"> {{ subcat.name }}</div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+      </div>
+            {% endfor %}
+
       </div>
     </div>
     <a class="item" onclick="window.location='/contact';" >Contact Us</a>
