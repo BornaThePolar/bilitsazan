@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from polls.forms import EventForm
-from polls.models import Category,SubCategory
+from polls.models import Category,SubCategory, Event
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 
@@ -52,7 +52,8 @@ def login(request):
 def manage(request):
     category = Category.objects.all()
     subcat = SubCategory.objects.all()
-    return render(request, 'manage.html', {'my_template': 'LoggedInTemplate.html', 'category': category, 'subcategory': subcat})
+    event = Event.objects.all()
+    return render(request, 'manage.html', {'my_template': 'LoggedInTemplate.html', 'category': category, 'subcategory': subcat, 'event': event})
 
 
     """  error=None

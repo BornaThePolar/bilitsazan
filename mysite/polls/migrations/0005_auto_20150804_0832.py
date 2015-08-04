@@ -13,6 +13,11 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterField(
             model_name='event',
+            name='photo',
+            field=models.FileField(upload_to='event_photoes/'),
+        ),
+        migrations.AlterField(
+            model_name='event',
             name='ticketsSold',
             field=models.IntegerField(default=0),
         ),

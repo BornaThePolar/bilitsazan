@@ -19,18 +19,19 @@
                         <div class="twelve wide column">
                             <h2>Events</h2>
                             <div class="ui divided items">
+                                {% for event in event %}
                                 <div class="item">
                                     <div class="image">
-                                        <img src={% static "image/download.jpg"%}>
+                                        <img src="/media/{{MEDIA_URL}}{{event.photo}}">
                                     </div>
                                     <div class="content">
-                                        <a class="header">4tar Concert</a>
+                                        <a class="header">{{ event.name }}</a>
                                         <div class="meta">
-                                            <span class="cinema">Azadi Cinema</span>
+                                            <span class="cinema">{{ event.location }}</span>
 
                                         </div>
                                         <div class="meta">
-                                            <span class="cinema">Date: 1/1/2001</span>
+                                            <span class="cinema">{{ event. }}</span>
                                         </div>
                                         <div class="meta">
                                             <span class="cinema">Number of Tickets: 2</span>
@@ -52,71 +53,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="item">
-                                    <div class="image">
-                                        <img src={% static "image/hMTavgm1.jpeg"%}>
-                                    </div>
-                                    <div class="content">
-                                        <a class="header">Game Of Thrones</a>
-                                        <div class="meta">
-                                            <span class="cinema">HassanGholi Cinema</span>
-                                        </div>
-                                        <div class="meta">
-                                            <span class="cinema">Date: 1/1/2001</span>
-                                        </div>
-                                        <div class="meta">
-                                            <span class="cinema">Number of Tickets: 2</span>
-                                        </div>
-                                        <div class="description">
-                                            <p></p>
-                                        </div>
-                                        <div class="extra">
-                                            <button class="ui right floated labeled icon red button">
-                                                <i class="remove icon"></i>
-                                                Remove
-                                            </button>
-                                        </div>
-                                        <div class="extra">
-                                            <button class="ui right floated labeled icon blue button">
-                                                <i class="edit icon"></i>
-                                                Edit
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="image">
-                                        <img src={% static "image/KSCOPE206-300.jpg"%}>
-                                    </div>
-                                    <div class="content">
-                                        <a class="header">Weather Systems Concert</a>
-                                        <div class="meta">
-                                            <span class="cinema">IFC</span>
-                                        </div>
-                                        <div class="meta">
-                                            <span class="cinema">Date: 1/1/2001</span>
-                                        </div>
-                                        <div class="meta">
-                                            <span class="cinema">Number of Tickets: 2</span>
-                                        </div>
-                                        <div class="description">
-                                            <p></p>
-                                        </div>
-                                        <div class="extra">
-                                            <button class="ui right floated labeled icon red button">
-                                                <i class="remove icon"></i>
-                                                Remove
-                                            </button>
-                                        </div>
-                                        <div class="extra">
-                                            <button class="ui right floated labeled icon blue button">
-                                                <i class="edit icon"></i>
-                                                Edit
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
