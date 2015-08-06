@@ -1,0 +1,47 @@
+ {% extends my_template %}
+{% block content %}
+
+    <div class="ui middle aligned center aligned grid" style="margin-top: 150px">
+        <div   class="five wide column">
+            <h2 class="ui teal image header">
+                <div class="content">
+                    Please fillout the event properties...
+                </div>
+            </h2>
+            <div class="form-group">
+
+
+                                <input id="id_price" name="price" type="number" />
+                            </div>
+
+                            <div class="form-group">
+
+
+                                <input id="id_ticketNumber" name="ticketNumber" placeholder=" ticket number" required="" type="text" />
+                            </div>
+
+
+        </div>
+    </div>
+
+    <script>
+    
+        $("#id_price").keypress(function(event) {
+            // if (event.which == 13) {
+            // event.preventDefault();
+            console.log('fuck you')
+            // }
+        });
+        $(document).ready(function(){
+            $('.modal')
+                .modal('show')
+        })
+
+        var x = $('#id_price').text()
+        var temp='<div class'+'="form-group"><input placeholder'+'=type" type" required'+'="" type'+'="text" /></div>'+'<div class'+'="form-group"><input placeholder'+'=Number" type" required'+'="" type'+'="text" /></div>'
+        console.log(x)
+        for(var i=0;i<x;i++){
+            $('#id_price').insertAfter(temp)
+        }
+    </script>
+{% endblock %}
