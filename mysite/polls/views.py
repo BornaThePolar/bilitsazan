@@ -3,16 +3,28 @@ from polls.forms import EventForm
 from polls.models import Category,SubCategory
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
+
 
 from .forms import Register
 from .forms import EventSubmit
 
 def register(request):
     form=Register(request.POST or None)
-    return render(request, 'register.html', {'form':form, 'my_template': 'NotLoggedIn.html'})
+    categories = Category.objects.all()
+    subcats = SubCategory.objects.all()
+
+    if request.user.is_authenticated():
+        context = {'form': form,'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+    else:
+         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+
+    return render(request, 'register.html', context)
 
 
 def eventSubmit(request):
+    categories = Category.objects.all()
+    subcats = SubCategory.objects.all()
     sub_cats_list = {}
     for cat in Category.objects.all():
         l = {}
@@ -31,33 +43,50 @@ def eventSubmit(request):
     else:
         form = EventForm()
 
-    context = {'form': form, 'my_template': 'LoggedInTemplate.html', 'sub_cats_list': sub_cats_list}
-    return render(request, 'eventSubmit.html',context)
+    if request.user.is_authenticated():
+        context = {'form': form,'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+    else:
+         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+
+    return render(request, 'eventSubmit.html', context)
+
+
 
 
 
 
 def buy(request):
-    context = {'my_template': 'NotLoggedIn.html'}
-    return render(request,'buy.html',context)
+    categories = Category.objects.all()
+    subcats = SubCategory.objects.all()
+    if request.user.is_authenticated():
+        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+    else:
+         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+
+    return render(request, 'buy.html', context)
+
+
 
 def about(request):
-    context = {'my_template': 'NotLoggedIn.html'}
-    return render(request,'AboutUs.html',context)
+    categories = Category.objects.all()
+    subcats = SubCategory.objects.all()
 
-def login(request):
-
-    return render(request, 'Login.html', { 'my_template': 'LoggedInTemplate.html'})
-
-def manage(request):
-    category = Category.objects.all()
-    subcat = SubCategory.objects.all()
-    return render(request, 'manage.html', {'my_template': 'LoggedInTemplate.html', 'category': category, 'subcategory': subcat})
-
-
-    """  error=None
     if request.user.is_authenticated():
-        return HttpResponseRedirect('/main/'+request.user.username)
+        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+    else:
+         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+
+    return render(request, 'about.html', context)
+
+
+
+def log(request):
+    categories = Category.objects.all()
+    subcats = SubCategory.objects.all()
+
+    error=None
+    if request.user.is_authenticated():
+       return HttpResponseRedirect('/main/')
     else:
         if request.method=="POST":
             usern=request.POST.get('username',None)
@@ -65,34 +94,91 @@ def manage(request):
             user = authenticate(username=usern,password=passw)
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect('/main/'+request.user.username)
+                return HttpResponseRedirect('/main/')
             else:
-                error='Username or Password is wrong'"""
+                error='Username or Password is wrong'
+
+    if request.user.is_authenticated():
+        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats , 'error':error}
+    else:
+         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats , 'error':error}
+
+    return render(request, 'Login.html', context)
+
+def manage(request):
+    categories = Category.objects.all()
+    subcats = SubCategory.objects.all()
+    if request.user.is_authenticated():
+        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+    else:
+         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+
+    return render(request, 'manage.html', context)
+
 
 
 def main(request):
-    context = {'my_template': 'NotLoggedIn.html'}
-    return render(request,'MainPage.html',context)
+    categories = Category.objects.all()
+    subcats = SubCategory.objects.all()
+    if request.user.is_authenticated():
+        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+    else:
+         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+
+    return render(request, 'MainPage.html', context)
 
 def home(request):
-    context = {'my_template': 'NotLoggedIn.html'}
-    return render(request,'homepage.html',context)
+    categories = Category.objects.all()
+    subcats = SubCategory.objects.all()
+
+    if request.user.is_authenticated():
+        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+    else:
+         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+
+    return render(request, 'homepage.html', context)
 
 def event(request):
-    context = {'my_template': 'NotLoggedIn.html'}
-    return render(request,'event.html',context)
+    categories = Category.objects.all()
+    subcats = SubCategory.objects.all()
+    if request.user.is_authenticated():
+        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+    else:
+         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+
+    return render(request, 'event.html', context)
 
 def report(request):
-    context = {'my_template': 'NotLoggedIn.html'}
-    return render(request,'Report.html',context)
+    categories = Category.objects.all()
+    subcats = SubCategory.objects.all()
+    if request.user.is_authenticated():
+        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+    else:
+         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+
+    return render(request, 'report.html', context)
 
 def contact(request):
-    context = {'my_template': 'NotLoggedIn.html'}
-    return render(request,'contact.html',context)
+    categories = Category.objects.all()
+    subcats = SubCategory.objects.all()
+    if request.user.is_authenticated():
+        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+    else:
+         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+
+    return render(request, 'contact.html', context)
+
 
 def event_report(request):
-    context = {'my_template': 'NotLoggedIn.html'}
-    return render(request,'EventReport.html',context)
+    categories = Category.objects.all()
+    subcats = SubCategory.objects.all()
+    if request.user.is_authenticated():
+        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+    else:
+         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+
+    return render(request, 'EventReport.html', context)
+
 
 def AddCategory(request,category_name):
     newCategory = Category()
@@ -123,3 +209,7 @@ def RemoveSubCategory(request, subcategory_id):
     if subcat is not None:
         subcat.delete()
     return HttpResponseRedirect('/manage/')
+
+def Logout(request):
+    logout(request)
+    return HttpResponseRedirect('/login/')

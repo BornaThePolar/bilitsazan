@@ -8,7 +8,7 @@ urlpatterns = [
     url(r'^eventsubmit/$', views.eventSubmit, name='eventSubmit'),
     url(r'^buy/$', views.buy, name='buy'),
     url(r'^about/$', views.about, name='about'),
-    url(r'^login/$', views.login, name='login'),
+    url(r'^login/$', views.log, name='login'),
     url(r'^main/$', views.main, name='main'),
     url(r'^home/$', views.home, name='home'),
     url(r'^event/$', views.event, name='event'),
@@ -20,6 +20,8 @@ urlpatterns = [
     url(r'^addCategory/(?P<category_name>\w+)/$', views.AddCategory, name='AddCategory'),
     url(r'^removeSubCategory/(?P<subcategory_id>\d+)/$', views.RemoveSubCategory, name='RemoveSubCategory'),
     url(r'^removeCategory/(?P<category_id>\d+)/$', views.RemoveCategory, name='RemoveCategory'),
+    url(r'^logout/$', views.Logout, name='logout'),
+
 
 
 
