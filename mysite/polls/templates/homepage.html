@@ -163,13 +163,13 @@
 <div class="ui large top fixed hidden menu">
   <div class="ui container">
     <a class="active item">Home</a>
-    <div class="ui pointing dropdown link item"  onclick="window.location='/polls/main';">
+    <div class="ui pointing dropdown link item"  onclick="window.location='/main';">
       <span class="text">Events</span>
       <i class="dropdown icon"></i>
       <div class="menu">
 
 
-        <a class="item" onclick="window.location='/polls/main';" ><i class="dropdown icon"></i>
+        <a class="item" onclick="window.location='/main';" ><i class="dropdown icon"></i>
           Concert
           <div class="menu">
             <div class="item">Pop</div>
@@ -179,23 +179,23 @@
             <div class="item">Classic</div>
 
           </div></a>
-        <a class="item" onclick="window.location='/polls/main';" >Theatre</a>
-        <a class="item" onclick="window.location='/polls/main';" >Cinema</a>
-        <a class="item" onclick="window.location='/polls/main';" >Others</a>
+        <a class="item" onclick="window.location='/main';" >Theatre</a>
+        <a class="item" onclick="window.location='/main';" >Cinema</a>
+        <a class="item" onclick="window.location='/main';" >Others</a>
       </div>
     </div>
-    <a class="item" class="item"onclick="window.location='/polls/contact';">Contact Us</a>
-    <a class="item" onclick="window.location='/polls/about';" >About US</a>
+    <a class="item" class="item"onclick="window.location='/contact';">Contact Us</a>
+    <a class="item" onclick="window.location='/about';" >About US</a>
     <div class="right menu">
        <div class="item"><div class="ui icon input">
   <input type="text" placeholder="Search...">
          <i class="search icon"></i>
 </div></div>
       <div class="item">
-        <a class="ui button" onclick="window.location='/polls/login';" >Log in</a>
+        <a class="ui button" onclick="window.location='/login';" >User Profile</a>
       </div>
       <div class="item">
-        <a class="ui primary button" onclick="window.location='/polls/register';" >Sign Up</a>
+        <a class="ui primary button" onclick="window.location='/logout';" >Sign out</a>
       </div>
     </div>
   </div>
@@ -235,13 +235,13 @@
           <i class="sidebar icon"></i>
         </a>
         <a  class="active brown item"> Home</a>
-        <div class="ui pointing dropdown link item" onclick="window.location='/polls/main';">
+        <div class="ui pointing dropdown link item" onclick="window.location='/main';">
           <span class="text">Events</span>
           <i class="dropdown icon"></i>
           <div class="menu">
 
 
-            <a class="item" onclick="window.location='/polls/main';" ><i class="dropdown icon"></i>
+            <a class="item" onclick="window.location='/main';" ><i class="dropdown icon"></i>
               Concert
               <div class="menu">
                 <div class="item">Pop</div>
@@ -251,21 +251,21 @@
                 <div class="item">Classic</div>
 
               </div></a>
-            <a class="item" onclick="window.location='/polls/main';" >Theatre</a>
-            <a class="item"onclick="window.location='/polls/main';" >Cinema</a>
-            <a class="item"onclick="window.location='/polls/main';" >Others</a>
+            <a class="item" onclick="window.location='/main';" >Theatre</a>
+            <a class="item"onclick="window.location='/main';" >Cinema</a>
+            <a class="item"onclick="window.location='/main';" >Others</a>
           </div>
         </div>
-        <a class="item" class="item"onclick="window.location='/polls/contact';">Contact Us</a>
-        <a class="item" onclick="window.location='/polls/about';" >About US</a>
+        <a class="item" class="item"onclick="window.location='/contact';">Contact Us</a>
+        <a class="item" onclick="window.location='/about';" >About US</a>
 
         <div class="right item">
           <div class="item"><div class="ui icon input">
   <input type="text" placeholder="Search...">
          <i class="search icon"></i>
 </div></div>
-          <a class="ui inverted brown button" onclick="window.location='/polls/login';" >Log in</a>
-          <a class="ui inverted olive button" onclick="window.location='/polls/register';" >Sign Up</a>
+          <a class="ui inverted brown button" onclick="window.location='/login';" >User Profile</a>
+          <a class="ui inverted olive button" onclick="window.location='/logout';" >Sign out</a>
         </div>
       </div>
     </div>
@@ -275,7 +275,7 @@
         TiBuy
       </h1>
       <h2>Join Today!</h2>
-      <div class="ui huge orange button"onclick="window.location='/polls/register';" >Register <i class="right arrow icon"></i></div>
+      <div class="ui huge orange button"onclick="window.location='/register';" >Register <i class="right arrow icon"></i></div>
 
     </div>
 
@@ -285,69 +285,31 @@
     <div class="ui middle centered aligned stackable grid container">
       <div class="row">
         <div class="twelve wide column">
-          <h2>Most Popular Events</h2>
+          <h2>Newest Events</h2>
           <div class="ui divided items">
+            {% for event in new %}
             <div class="item">
               <div class="image">
-                <img src={% static "image/download.jpg"%}>
+                <img src="/media/{{MEDIA_URL}}{{event.photo}}">
               </div>
               <div class="content">
-                <a class="header">4tar Concert</a>
+                <a class="header">{{ event.subject }}</a>
                 <div class="meta">
-                  <span class="cinema">Azadi Cinema</span>
+                  <span class="cinema">{{ event.date }}</span>
                 </div>
                 <div class="description">
                   <p></p>
                 </div>
                 <div class="extra">
-                  <div class="ui right floated primary button" onclick="window.location='/polls/event';" >
+                  <div class="ui right floated primary button" onclick="window.location='/event';" >
                     Buy tickets
                     <i class="right chevron icon"></i>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="item">
-              <div class="image">
-                <img src={% static "image/hMTavgm1.jpeg"%}>
-              </div>
-              <div class="content">
-                <a class="header">Game Of Thrones</a>
-                <div class="meta">
-                  <span class="cinema">HassanGholi Cinema</span>
-                </div>
-                <div class="description">
-                  <p></p>
-                </div>
-                <div class="extra">
-                  <div class="ui right floated primary button" onclick="window.location='/polls/event';" >
-                    Buy tickets
-                    <i class="right chevron icon"></i>
-                  </div>
-                  <div class="ui label">Limited</div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="image">
-                <img src={% static "image/KSCOPE206-300.jpg"%}>
-              </div>
-              <div class="content">
-                <a class="header">Weather Systems Concert</a>
-                <div class="meta">
-                  <span class="cinema">IFC</span>
-                </div>
-                <div class="description">
-                  <p></p>
-                </div>
-                <div class="extra">
-                  <div class="ui right floated primary button">
-                    Buy tickets
-                    <i class="right chevron icon"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -360,16 +322,20 @@
     <div class="ui middle centered aligned stackable grid container">
       <div class="row">
         <div class="twelve wide column">
-          <h2>Newest Events</h2>
+          <h2>Most Popular Events</h2>
           <div class="ui divided items">
+            {% for event in popular %}
             <div class="item">
               <div class="image">
-                <img src={% static "image/download.jpg"%}>
+                <img src="/media/{{MEDIA_URL}}{{event.photo}}">
               </div>
               <div class="content">
-                <a class="header">4tar Concert</a>
+                <a class="header">{{ event.subject }}</a>
                 <div class="meta">
-                  <span class="cinema">Azadi Cinema</span>
+                  <span class="cinema">{{ event.date }}</span>
+                </div>
+                <div class="meta">
+                  <span class="cinema">Rate: {{ event.score }}</span>
                 </div>
                 <div class="description">
                   <p></p>
@@ -382,47 +348,7 @@
                 </div>
               </div>
             </div>
-            <div class="item">
-              <div class="image">
-                <img src={% static "image/hMTavgm1.jpeg"%}>
-              </div>
-              <div class="content">
-                <a class="header">Game Of Thrones</a>
-                <div class="meta">
-                  <span class="cinema">HassanGholi Cinema</span>
-                </div>
-                <div class="description">
-                  <p></p>
-                </div>
-                <div class="extra">
-                  <div class="ui right floated primary button">
-                    Buy tickets
-                    <i class="right chevron icon"></i>
-                  </div>
-                  <div class="ui label">Limited</div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="image">
-                <img src={% static "image/KSCOPE206-300.jpg"%}>
-              </div>
-              <div class="content">
-                <a class="header">Weather Systems Concert</a>
-                <div class="meta">
-                  <span class="cinema">IFC</span>
-                </div>
-                <div class="description">
-                  <p></p>
-                </div>
-                <div class="extra">
-                  <div class="ui right floated primary button">
-                    Buy tickets
-                    <i class="right chevron icon"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {% endfor %}
           </div>
         </div>
       </div>

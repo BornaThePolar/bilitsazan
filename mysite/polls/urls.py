@@ -10,6 +10,8 @@ urlpatterns = [
     url(r'^about/$', views.about, name='about'),
     url(r'^login/$', views.log, name='login'),
     url(r'^main/$', views.main, name='main'),
+    url(r'^main/(?P<category_name>\w+)$', views.mainFilter, name='mainFilter'),
+    url(r'^main/(?P<category_name>\w+)/(?P<subcategory_name>\w+)$', views.mainFilterSub, name='mainFilter'),
     url(r'^home/$', views.home, name='home'),
     url(r'^event/$', views.event, name='event'),
     url(r'^report/$', views.report, name='report'),
@@ -20,6 +22,8 @@ urlpatterns = [
     url(r'^addCategory/(?P<category_name>\w+)/$', views.AddCategory, name='AddCategory'),
     url(r'^removeSubCategory/(?P<subcategory_id>\d+)/$', views.RemoveSubCategory, name='RemoveSubCategory'),
     url(r'^removeCategory/(?P<category_id>\d+)/$', views.RemoveCategory, name='RemoveCategory'),
+    url(r'^removeEvent/(?P<event_id>\d+)/$', views.RemoveEvent, name='RemoveEvent'),
+    url(r'^editEvent/(?P<event_id>\d+)/$', views.EditEvent, name='EditEvent'),
     url(r'^logout/$', views.Logout, name='logout'),
 
 

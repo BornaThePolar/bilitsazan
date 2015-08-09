@@ -1,309 +1,182 @@
 
-    {% extends my_template %}
+{% extends my_template %}
 {% block content %}
-<!DOCTYPE html>
-<html lang="en ">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <title></title>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <!DOCTYPE html>
+    <html lang="en ">
+    <head>
+        {% load static %}
+        <meta charset="UTF-8">
+        <title></title>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-    <!-- Site Properities -->
-    <title>Homepage - Semantic</title>
-
-
-
-
-    <style type="text/css">
-
-        .hidden.menu {
-            display: none;
-        }
+        <!-- Site Properities -->
+        <title>Homepage - Semantic</title>
 
 
 
 
-    </style>
+        <style type="text/css">
 
-</head>
-<body  >
-
-
-</div>
-<div class="container" style="margin-left: 70px; margin-right: 60px;">
-    <!--<div class="ui segment" style="margin-top: 80px">
-      <div class="ui people shape">
-        <div class="sides">
-          <div class="active side ">
-            <div class="ui card ">
-              <div class="image left floated   ">
-                <img src="image/download.jpg">
-              </div>
-
-            </div>
-          </div>
-          <div class="side">
-            <div class="ui card">
-              <div class="image">
-                <img src="image/0o91ui7eiu9w5rq9kg8s.jpg">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> <div class="ui ignored icon direction buttons">
-      <div id="flipleft" onclick="flipleft()" class="ui button" data-animation="flip" title="Flip Left" data-direction="left"><i class="left long arrow icon"></i></div>
-      <div id="flipright" onclick="flipright()" class="ui icon button" data-animation="flip" title="Flip Right" data-direction="right"><i class="right long arrow icon"></i></div>
-    </div> </div>-->
-
-    <div class="ui two column doubling grid" style="margin-top: 250px">
-        <div class="four wide floated column ">
-            <div class="ui vertical  menu"  >
-
-                <div class="ui left pointing dropdown link item">
-                    <i class="dropdown icon"></i>
-                    <img class="middle aligned"  style="height: 20px; width: 20px"src={% static "image/Visualpharm-Icons8-Metro-Style-Music-Microphone2.png"%}>Concert
-                    <div class="menu">
-                        <div class="item">Pop</div>
-                        <div class="item">Rock</div>
-                        <div class="item">Country</div>
-                        <div class="item">Metal</div>
-                        <div class="item">Classic</div>
-
-                    </div>
-                </div>
+            .hidden.menu {
+                display: none;
+            }
 
 
 
 
-                <a class="item">
-                    <img class="middle aligned"  style="height: 20px; width: 20px"src={% static "image/icon_3478.png" %}>
-                    <span>Cinema</span>
-                </a>
-                <a class="item">
-                    <img class="middle aligned"  style="height: 20px; width: 20px" src={% static "image/theatre_masks.png"%}>
-                    <span>Theatre</span>
-                </a>
-                <a class="item">
-                    Others
-                </a>
-            </div>
-        </div>
+        </style>
 
-        <div class="twelve wide column" id="main-content">
-
-            <div class="ui special cards">
-                <div class="card">
-                    <div class="blurring dimmable image">
-                        <div class="ui dimmer">
-                            <div class="content">
-                                <div class="center">
-                                    <div class="ui inverted button" onclick="window.location='/polls/event';" >Buy</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ui left floated center tertiary inverted red segment" style="display: inline; position: absolute; z-index: 100; padding-bottom: 8px; padding-top: 8px">
-                            <p style="margin-right: 30px">Price: 50,000 T</p>
-                        </div>
-                        <img src={% static "image/download.jpg"%}>
-
-
-                    </div>
-                    <div class="content">
-                        <a class="header">Concert</a>
-                        <div class="meta">
-                            <span class="date">An awesome concert that you have been waiting for it for a long time. buy as soon as you can before it is all sold out</span>
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <a>
-                            <i class="map icon"></i>
-                            shahr Theatre
-                            <div style="display: inline" class="right floated">
-                                <i class="ticket icon right floated"></i>
-                                Sold: 84
-                            </div>
-
-                        </a>
-                    </div>
-
-                    <div class="extra content">
-                        <a>
-                            <i class="map icon"></i>
-                            Date: 8/5/2015
-                            <div style="display: inline" class="right floated">
-                                <div class='ui star rating'><i class='active icon'></i><i class='active icon'></i><i class='active icon'></i><i class='icon'></i><i class='icon'></i></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="blurring dimmable image">
-                        <div class="ui dimmer">
-                            <div class="content">
-                                <div class="center">
-                                    <div class="ui inverted button" onclick="window.location='/polls/event';" >Buy</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="ui left floated center tertiary inverted red segment" style="display: inline; position: absolute; z-index: 100; padding-bottom: 8px; padding-top: 8px">
-                            <p style="margin-right: 30px">Price: 50,000 T</p>
-                        </div>
-                        <img src={% static "image/download.jpg"%}>
-                    </div>
-                    <div class="content">
-                        <a class="header">Concert</a>
-                        <div class="meta">
-                            <span class="date">An awesome concert that you have been waiting for it for a long time. buy as soon as you can before it is all sold out</span>
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <a>
-                            <i class="map icon"></i>
-                            shahr Theatre
-                            <div style="display: inline" class="right floated">
-                                <i class="ticket icon right floated"></i>
-                                Sold: 84
-                            </div>
-
-                        </a>
-                    </div>
-
-                    <div class="extra content">
-                        <a>
-                            <i class="map icon"></i>
-                            Date: 8/5/2015
-                            <div style="display: inline" class="right floated">
-                                <div class='ui star rating'><i class='active icon'></i><i class='active icon'></i><i class='active icon'></i><i class='icon'></i><i class='icon'></i></div>
-                            </div>
-                        </a>
-                    </div>
-                </div><div class="card">
-                <div class="blurring dimmable image">
-                    <div class="ui dimmer">
-                        <div class="content">
-                            <div class="center">
-                                <div class="ui inverted button" onclick="window.location='/polls/event';" >Buy</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ui left floated center tertiary inverted red segment" style="display: inline; position: absolute; z-index: 100; padding-bottom: 8px; padding-top: 8px">
-                        <p style="margin-right: 30px">Price: 50,000 T</p>
-                    </div>
-                    <img src={% static "image/download.jpg"%}>
-                </div>
-                <div class="content">
-                    <a class="header">Concert</a>
-                    <div class="meta">
-                        <span class="date">An awesome concert that you have been waiting for it for a long time. buy as soon as you can before it is all sold out</span>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <a>
-                        <i class="map icon"></i>
-                        shahr Theatre
-                        <div style="display: inline" class="right floated">
-                            <i class="ticket icon right floated"></i>
-                            Sold: 84
-                        </div>
-
-                    </a>
-                </div>
-
-                <div class="extra content">
-                    <a>
-                        <i class="map icon"></i>
-                        Date: 8/5/2015
-                        <div style="display: inline" class="right floated">
-                            <div class='ui star rating'><i class='active icon'></i><i class='active icon'></i><i class='active icon'></i><i class='icon'></i><i class='icon'></i></div>
-                        </div>
-                    </a>
-                </div>
-            </div><div class="card">
-                <div class="blurring dimmable image">
-                    <div class="ui dimmer">
-                        <div class="content">
-                            <div class="center">
-                                <div class="ui inverted button" onclick="window.location='/polls/event';" >Buy</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ui left floated center tertiary inverted red segment" style="display: inline; position: absolute; z-index: 100; padding-bottom: 8px; padding-top: 8px">
-                        <p style="margin-right: 30px">Price: 50,000 T</p>
-                    </div>
-                    <img src={% static "image/download.jpg"%}>
-                </div>
-                <div class="content">
-                    <a class="header">Concert</a>
-                    <div class="meta">
-                        <span class="date">An awesome concert that you have been waiting for it for a long time. buy as soon as you can before it is all sold out</span>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <a>
-                        <i class="map icon"></i>
-                        shahr Theatre
-                        <div style="display: inline" class="right floated">
-                            <i class="ticket icon right floated"></i>
-                            Sold: 84
-                        </div>
-
-                    </a>
-                </div>
-
-                <div class="extra content">
-                    <a>
-                        <i class="map icon"></i>
-                        Date: 8/5/2015
-                        <div style="display: inline" class="right floated">
-                            <div class='ui star rating'><i class='active icon'></i><i class='active icon'></i><i class='active icon'></i><i class='icon'></i><i class='icon'></i></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            </div>
-        </div>
+    </head>
+    <body  >
 
 
     </div>
-</div>
+    <div class="container" style="margin-left: 70px; margin-right: 60px;">
+        <!--<div class="ui segment" style="margin-top: 80px">
+          <div class="ui people shape">
+            <div class="sides">
+              <div class="active side ">
+                <div class="ui card ">
+                  <div class="image left floated   ">
+                    <img src="image/download.jpg">
+                  </div>
 
-</div>
+                </div>
+              </div>
+              <div class="side">
+                <div class="ui card">
+                  <div class="image">
+                    <img src="image/0o91ui7eiu9w5rq9kg8s.jpg">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> <div class="ui ignored icon direction buttons">
+          <div id="flipleft" onclick="flipleft()" class="ui button" data-animation="flip" title="Flip Left" data-direction="left"><i class="left long arrow icon"></i></div>
+          <div id="flipright" onclick="flipright()" class="ui icon button" data-animation="flip" title="Flip Right" data-direction="right"><i class="right long arrow icon"></i></div>
+        </div> </div>-->
+
+        <div class="ui two column doubling grid" style="margin-top: 250px">
+            <div class="four wide floated column ">
+                <div class="ui vertical  menu"  >
+                <div class="ui left pointing dropdown link item" onclick="window.location='/main/';">All</div>
+                    {% for category in categories %}
+                    <div class="ui left pointing dropdown link item" onclick="window.location='/main/{{ category.name }}';">
+
+                        {{ category.name }}
+                        <div class="menu">
+                            {% for subcat in subcats %}
+                                {% if subcat.daste == category %}
+                            <div class="item" onclick="subcat(event,{{ category.name }},{{ subcat.name }})">{{ subcat.name }}</div>
+                                {% endif %}
+                                {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
 
 
-</div>
-<script>
-    $('.special.cards .image').dimmer({
-        on: 'hover'
-    });
-    $('.shape').shape();
 
 
-    function flipleft(){
-        $('.shape').shape('flip left');
-        console.log('an ')
-    }
-    function flipright(){
-        $('.shape').shape('flip right');
-    }
+                </div>
+            </div>
 
-    $('.dropdown').dropdown({
-        // you can use any ui transition
-        transition: 'drop'
+            <div class="twelve wide column" id="main-content">
+
+                <div class="ui special cards">
+                    {% for event in event %}
+                        <div class="card">
+                            <div class="blurring dimmable image">
+                                <div class="ui dimmer">
+                                    <div class="content">
+                                        <div class="center">
+                                            <div class="ui inverted button" onclick="window.location='/polls/event';" >Buy</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui left floated center tertiary inverted red segment" style="display: inline; position: absolute; z-index: 100; padding-bottom: 8px; padding-top: 8px">
+                                    <p style="margin-right: 30px">Price: {{ event.price }} T</p>
+                                </div>
+                                <img src="/media/{{MEDIA_URL}}{{event.photo}}">
 
 
-    })
-    $('.dropdown').dropdown({on:'hover'});
-    $('.ui.sticky')
-            .sticky({
-                context: '#main-content'
-            })
-    ;
-</script>
-</body>
-</html>
+                            </div>
+                            <div class="content">
+                                <a class="header">{{ event.subject }}</a>
+                                <div class="meta">
+                                    <span class="date">{{ event.description }}</span>
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <a>
+                                    <i class="map icon"></i>
+                                    shahr Theatre
+                                    <div style="display: inline" class="right floated">
+                                        <i class="ticket icon right floated"></i>
+                                        Tickets Left: {{ event.ticketsLeft }}
+                                    </div>
 
-    {% endblock %}
+                                </a>
+                            </div>
+
+                            <div class="extra content">
+                                <a>
+                                    <i class="map icon"></i>
+                                    Date: {{ event.date }}
+                                    <div style="display: inline" class="right floated">
+                                    Rate: {{ event.score }}
+
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+    </div>
+    <script>
+        function subcat(e,i,j){
+            e.preventDefault()
+            e.stopPropagation()
+            window.location='/main/'+i+j;
+        }
+        $('.special.cards .image').dimmer({
+            on: 'hover'
+        });
+        $('.shape').shape();
+
+
+        function flipleft(){
+            $('.shape').shape('flip left');
+            console.log('an ')
+        }
+        function flipright(){
+            $('.shape').shape('flip right');
+        }
+
+        $('.dropdown').dropdown({
+            // you can use any ui transition
+            transition: 'drop'
+
+
+        })
+        $('.dropdown').dropdown({on:'hover'});
+        $('.ui.sticky')
+                .sticky({
+                    context: '#main-content'
+                })
+        ;
+    </script>
+    </body>
+    </html>
+
+{% endblock %}

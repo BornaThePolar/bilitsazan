@@ -26,7 +26,7 @@ class Ticket(models.Model):
     seat=models.IntegerField()
 
 class Event(models.Model):
-    user=models.ForeignKey('UserProfile')
+    #user=models.ForeignKey('UserProfile')
     date=models.DateField()
     ticketsLeft=models.IntegerField()
     ticketsSold=models.IntegerField(default=0)
@@ -37,8 +37,8 @@ class Event(models.Model):
     finishDate=models.DateField()
     price=models.IntegerField()
     photo = models.FileField(upload_to='event_photoes/')
-    scoredUsers = models.ForeignKey('Scorers', null=True)
-    score=models.FloatField(default=0)
+    #scoredUsers = models.ForeignKey('Scorers', null=True)
+    score=models.FloatField(default=3.5)
 
 class Scorers(models.Model):
     scorers= models.ManyToManyField('UserProfile')
@@ -53,14 +53,14 @@ class Comment(models.Model):
 class Category(models.Model):
     name=models.CharField(max_length=32)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 class SubCategory(models.Model):
     name=models.CharField(max_length=32)
     daste=models.ForeignKey('Category')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 

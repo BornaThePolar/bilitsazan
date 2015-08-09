@@ -25,28 +25,34 @@
                                         <img src="/media/{{MEDIA_URL}}{{event.photo}}">
                                     </div>
                                     <div class="content">
-                                        <a class="header">{{ event.name }}</a>
+                                        <a class="header">{{ event.subject }}</a>
                                         <div class="meta">
-                                            <span class="cinema">{{ event.location }}</span>
+                                            <span class="cinema">{{ event.date }}</span>
 
                                         </div>
                                         <div class="meta">
-                                            <span class="cinema">{{ event.location }}</span>
+                                            <span class="cinema">{{ event.category.name }}</span>
+
                                         </div>
                                         <div class="meta">
-                                            <span class="cinema">Number of Tickets: 2</span>
+                                            <span class="cinema">{{ event.subCategory.name }}</span>
+
+                                        </div>
+
+                                        <div class="meta">
+                                            <span class="cinema">tickets left: {{ event.ticketsLeft }}</span>
                                         </div>
                                         <div class="description">
                                             <p></p>
                                         </div>
                                         <div class="extra">
-                                            <button class="ui right floated labeled icon red button">
+                                            <button class="ui right floated labeled icon red button" onclick="window.location='/removeEvent/'+{{ event.id }};">
                                                 <i class="remove icon"></i>
                                                 Remove
                                             </button>
                                         </div>
                                         <div class="extra">
-                                            <button class="ui right floated labeled icon blue button">
+                                            <button class="ui right floated labeled icon blue button" onclick="window.location='/editEvent/'+{{ event.id }};">
                                                 <i class="edit icon"></i>
                                                 Edit
                                             </button>
