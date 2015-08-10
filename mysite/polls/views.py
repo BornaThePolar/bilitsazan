@@ -171,13 +171,14 @@ def home(request):
 
     return render(request, 'homepage.html', context)
 
-def event(request):
+def event(request, event_id):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
+    event = Event.objects.all().filter(id=event_id)
     if request.user.is_authenticated():
-        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats, 'event': event}
     else:
-         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats, 'event': event}
 
     return render(request, 'event.html', context)
 
