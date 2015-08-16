@@ -135,7 +135,7 @@ def manage(request):
     event = Event.objects.all()
 
     if request.user.is_superuser:
-         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats}
+         context = {'my_template': 'adminTemplate.html','category': categories, 'subcategory': subcats, 'event': event}
     else:
         if request.user.is_authenticated():
             context = {'my_template': 'LoggedInTemplate.html','category': categories, 'subcategory': subcats, 'event': event}
@@ -157,7 +157,8 @@ def main(request):
         if request.user.is_authenticated():
             context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats,'event': event}
         else:
-         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats,'event': event}
+         error='You must first login'
+         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats,'event': event,'error':error}
 
     return render(request, 'MainPage.html', context)
 
@@ -200,7 +201,8 @@ def home(request):
         if request.user.is_authenticated():
             context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular}
         else:
-            context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular}
+            error='You must first login'
+            context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular , 'error' : error}
 
     return render(request, 'homepage.html', context)
 
@@ -263,7 +265,6 @@ def AddCategory(request,category_name):
     newCategory = Category()
     newCategory.name=category_name
     newCategory.save()
-    print('hello')
     return HttpResponseRedirect('/manage/')
 
 def AddSubCategory(request,subcategory_name, subcategory_id):
