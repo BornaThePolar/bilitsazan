@@ -24,7 +24,7 @@ def register(request):
     if request.user.is_authenticated():
         context = {'form': form,'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
     else:
-         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+         context = {'form': form,'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
 
     return render(request, 'register.html', context)
 
@@ -53,7 +53,7 @@ def eventSubmit(request):
     if request.user.is_authenticated():
         context = {'form': form,'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
     else:
-         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+         context = {'form': form,'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
 
     return render(request, 'eventSubmit.html', context)
 
@@ -83,7 +83,7 @@ def about(request):
     else:
          context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
 
-    return render(request, 'about.html', context)
+    return render(request, 'AboutUs.html', context)
 
 
 
