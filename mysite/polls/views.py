@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from polls.forms import EventForm
+from polls.forms import EventForm, TicketTypeFormSet
 from polls.models import Category,SubCategory, Event
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
@@ -44,16 +44,20 @@ def eventSubmit(request):
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
             event = form.save(commit=False)
+            formset = TicketTypeFormSet(request.POST, request.FILES, instance=event)
             #event.user_id = request.user.userprofile.id
-            event.save()
+            if formset.is_valid():
+                event.save()
+                formset.save()
             return HttpResponseRedirect('/manage/')
     else:
         form = EventForm()
+        formset = TicketTypeFormSet()
 
     if request.user.is_authenticated():
-        context = {'form': form,'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+        context = {'form': form, 'formset': formset, 'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats, 'sub_cats_list': sub_cats_list}
     else:
-         context = {'form': form,'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+         context = {'form': form, 'formset': formset, 'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats, 'sub_cats_list': sub_cats_list}
 
     return render(request, 'eventSubmit.html', context)
 
