@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block layout %}
-    <div class="ui large top inverted fixed menu" style="background-color: #008080;">
+    <div class="ui large top inverted fixed menu" style="background-color: #008080; border-bottom: 2px solid white">
   <div class="ui container" >
-    <a class="item" onclick="window.location='/home';" >Home</a>
-    <div class="ui pointing dropdown link item" onclick="window.location='/main';">
-      <span class="text">Events</span>
+    <a class=" item"onclick="window.location='/home';">Home</a>
+    <div class="ui pointing dropdown link item">
+      <span class="text"onclick="window.location='/main';">Events</span>
       <i class="dropdown icon"></i>
       <div class="menu" style="z-index: 100">
 
@@ -26,21 +26,25 @@
 
       </div>
     </div>
-    <a class="item" onclick="window.location='/contact';" >Contact Us</a>
+    <a class="item"onclick="window.location='/contact';">Contact Us</a>
     <a class="item" onclick="window.location='/about';" >About US</a>
     <div class="right menu">
       <div class="item"><div class="ui icon input">
 
 </div></div>
-      <div class="item">
-        <a class="ui inverted blue basic button" onclick="window.location='/login';" >Log in</a>
+        <div class="item">
+        <a class="ui inverted blue basic button" onclick="window.location='/eventsubmit';"> <i class="user icon"></i>New Event</a>
       </div>
       <div class="item">
-        <a class="ui inverted black button" onclick="window.location='/register';" >Sign Up</a>
+        <a class="ui inverted blue basic button" onclick="window.location='/manage';"> <i class="user icon"></i>Manage</a>
+      </div>
+      <div class="item">
+        <a class="ui inverted black button" onclick="window.location='/logout';" >Log out</a>
       </div>
     </div>
   </div>
 </div>
-    {% block content %}
-        {% endblock %}
+
+{% block content %}
+{% endblock %}
 {% endblock %}
