@@ -9,15 +9,15 @@
       <div class="menu" style="z-index: 100">
 
 
-       <i class="dropdown icon"></i>
+        <i class="dropdown icon"></i>
              {% for category in categories %}
 
-                 <div class="item">
+                 <div class="item" onclick="window.location='/main/{{ category.name }}';">
                  {{ category.name }}
                 <div class="menu">
                     {% for subcat in subcats %}
                         {% if subcat.daste == category %}
-                            <div class="item"> {{ subcat.name }}</div>
+                            <div class="item" onclick="subcat(event,{{ category.name }},{{ subcat.name }})"> {{ subcat.name }}</div>
                         {% endif %}
                     {% endfor %}
                 </div>
