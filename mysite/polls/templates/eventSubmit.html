@@ -18,9 +18,10 @@
                         {{ form.as_p }}
 
                     </div>
-                    <table>
+                    <table id="formset-table">
                     {{ formset.as_table }}
                     </table>
+                    <input type="button" class="ui fluid large teal button" value="Add Ticket Type" id="add-type">
                     <input type="submit" class="ui fluid large teal submit button" >
                 </div>
 
@@ -63,10 +64,6 @@
             console.log('fuck you');
             // }
         });
-        document.ready(function(){
-            $('.modal')
-                .modal('show')
-        });
 
         var x = $('#id_price').text();
         var temp='<div class'+'="form-group"><input placeholder'+'=type" type" required'+'="" type'+'="text" /></div>'+'<div class'+'="form-group"><input placeholder'+'=Number" type" required'+'="" type'+'="text" /></div>'
@@ -90,6 +87,45 @@
                 $('select#id_subCategory').append($("<option></option>").attr("value", value).text(key));
             });
         });
+
+            $('#add-type').click(function () {
+                console.log('clicked');
+                function get_ticket_type(num) {
+                    return '<tr><th><label for="id_eventtickettype_set-'
+                            + num +
+                            '-name">Name:</label></th><td><input id="id_eventtickettype_set-'
+                            + num +
+                            '-name" maxlength="50" name="eventtickettype_set-'
+                            + num +
+                            '-name" type="text"></td></tr><tr><th><label for="id_eventtickettype_set-'
+                            + num +
+                            '-price">Price:</label></th><td><input id="id_eventtickettype_set-'
+                            + num +
+                            '-price" name="eventtickettype_set-'
+                            + num +
+                            '-price" type="number"></td></tr><tr><th><label for="id_eventtickettype_set-'
+                            + num +
+                            '-tickets">Tickets:</label></th><td><input id="id_eventtickettype_set-'
+                            + num +
+                            '-tickets" name="eventtickettype_set-'
+                            + num +
+                            '-tickets" type="number"></td></tr><tr><th><label for="id_eventtickettype_set-'
+                            + num +
+                            '-DELETE">Delete:</label></th><td><input id="id_eventtickettype_set-'
+                            + num +
+                            '-DELETE" name="eventtickettype_set-'
+                            + num +
+                            '-DELETE" type="checkbox"><input id="id_eventtickettype_set-'
+                            + num +
+                            '-id" name="eventtickettype_set-'
+                            + num +
+                            '-id" type="hidden">';
+                }
+
+                var num = parseInt($('#id_eventtickettype_set-TOTAL_FORMS').val());
+                $('#formset-table tbody').html($('#formset-table tbody').html() + get_ticket_type(num));
+                $('#id_eventtickettype_set-TOTAL_FORMS').val(num + 1);
+            });
     </script>
 {% endblock %}
 
