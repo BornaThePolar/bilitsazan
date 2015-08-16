@@ -1,6 +1,7 @@
+from random import randint
 from django.shortcuts import render
 from polls.forms import EventForm, TicketTypeFormSet
-from polls.models import Category,SubCategory, Event, EventTicketType
+from polls.models import Category,SubCategory, Event, EventTicketType, Order
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
 
@@ -101,18 +102,29 @@ def buy(request, event_id):
 
     typ = EventTicketType.objects.get(id=request.POST.get('type'))
     count = int(request.POST.get('numoftickets'))
+    price = typ.price * count
 
     if count > typ.tickets:
         return HttpResponseRedirect('/event/%s?error=1' % event_id)
 
+    if request.POST.get('done', 0):
+        typ.tickets -= count
+        typ.save()
+        order = Order(user=request.user, event=event, cost=price, number=count, rahgiriCode=randint(1000000, 9999999),
+                      ticket_type=typ)
+        order.save()
+        return HttpResponseRedirect('/event/%s?bought=%d' % (event_id, order.id)) # todo: change with receipt page
+
     if request.user.is_superuser:
-        context = {'my_template': 'adminTemplate.html', 'categories': categories, 'subcats': subcats, 'event': event}
+        context = {'my_template': 'adminTemplate.html', 'categories': categories, 'subcats': subcats, 'event': event
+            , 'typ': typ, 'count': count, 'price': price}
     else:
         if request.user.is_authenticated():
             context = {'my_template': 'LoggedInTemplate.html', 'categories': categories, 'subcats': subcats,
-                       'event': event}
+                       'event': event, 'typ': typ, 'count': count, 'price': price}
         else:
-            context = {'my_template': 'NotLoggedIn.html', 'categories': categories, 'subcats': subcats, 'event': event}
+            context = {'my_template': 'NotLoggedIn.html', 'categories': categories, 'subcats': subcats, 'event': event
+                , 'typ': typ, 'count': count, 'price': price}
 
     return render(request, 'buy.html', context)
 
@@ -242,16 +254,22 @@ def event(request, event_id):
     event = Event.objects.all().filter(id=event_id)
 
     error = request.GET.get('error', 0)
+    bought = request.GET.get('bought', 0)
+
+    order = None
+    if bought:
+        order = Order.objects.get(id=bought)
+
     if request.user.is_superuser:
         context = {'my_template': 'adminTemplate.html', 'categories': categories, 'subcats': subcats, 'event': event,
-                   'error': error}
+                   'error': error, 'order': order}
     else:
         if request.user.is_authenticated():
             context = {'my_template': 'LoggedInTemplate.html', 'categories': categories, 'subcats': subcats,
-                       'event': event, 'error': error}
+                       'event': event, 'error': error, 'order': order}
         else:
             context = {'my_template': 'NotLoggedIn.html', 'categories': categories, 'subcats': subcats, 'event': event,
-                       'error': error}
+                       'error': error, 'order': order}
 
     return render(request, 'event.html', context)
 

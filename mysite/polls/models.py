@@ -11,15 +11,13 @@ class UserProfile(models.Model):
 
 
 class Order(models.Model):
-    user=models.ForeignKey('UserProfile')
+    user=models.ForeignKey(User)
     event = models.ForeignKey('Event')
     cost=models.IntegerField()
     number=models.IntegerField()
-
-class Buy(models.Model):
     rahgiriCode=models.IntegerField()
-    price=models.IntegerField()
-    date=models.DateField()
+    ticket_type = models.ForeignKey('EventTicketType')
+    date = models.DateTimeField(auto_now_add=True)
 
 class Ticket(models.Model):
     event = models.ForeignKey('Event')

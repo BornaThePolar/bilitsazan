@@ -83,7 +83,9 @@
                                 <p>{{ event.description }}
                                 </p>
                             </div>
-                            {% if error %}<div class="ui info message">You tried to buy seats more than tickets remaining</div>{% endif %}
+                            {% if error %}<div class="ui warning message">You tried to buy seats more than tickets remaining</div>{% endif %}
+                            {% if order %}<div class="ui positive message"><div class="header">You have purchased {{ order.number }} of {{ order.ticket_type.name }}.</div>
+                                Your purchase code is: <b>{{ order.rahgiriCode }}</b></div>{% endif %}
                         </div>
                         <div class="four wide column">
                             <h2> Rate! </h2>
