@@ -24,9 +24,15 @@
           </div>
         </div>
         <input type="submit" value="login">
+      <div>
+          {% if error != None %}
+        <label class="alert alert-danger"  style="color: red; width: 100%; margin-top: 10px"> {{ error }} </label>
+    {% endif %}
       </div>
 
-      <div class="ui error message">Username and Password do not match</div>
+      </div>
+
+
 
 
     </form>
