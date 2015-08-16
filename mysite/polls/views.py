@@ -21,10 +21,13 @@ def register(request):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
 
-    if request.user.is_authenticated():
-        context = {'form': form,'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
-    else:
-         context = {'form': form,'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+    if request.user.is_superuser:
+         context = {'form': form,'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats}
+    else :
+        if request.user.is_authenticated():
+            context = {'form': form,'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+        else:
+            context = {'form': form,'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
 
     return render(request, 'register.html', context)
 
@@ -54,10 +57,13 @@ def eventSubmit(request):
         form = EventForm()
         formset = TicketTypeFormSet()
 
-    if request.user.is_authenticated():
-        context = {'form': form, 'formset': formset, 'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats, 'sub_cats_list': sub_cats_list}
+    if request.user.is_superuser:
+         context = {'form': form, 'formset': formset,'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats, 'sub_cats_list': sub_cats_list}
     else:
-         context = {'form': form, 'formset': formset, 'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats, 'sub_cats_list': sub_cats_list}
+        if request.user.is_authenticated():
+            context = {'form': form, 'formset': formset, 'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats, 'sub_cats_list': sub_cats_list}
+        else:
+            context = {'form': form, 'formset': formset, 'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats, 'sub_cats_list': sub_cats_list}
 
     return render(request, 'eventSubmit.html', context)
 
@@ -69,10 +75,14 @@ def eventSubmit(request):
 def buy(request):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
-    if request.user.is_authenticated():
-        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+
+    if request.user.is_superuser:
+         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats}
     else:
-         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+        if request.user.is_authenticated():
+            context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+        else:
+            context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
 
     return render(request, 'buy.html', context)
 
@@ -82,9 +92,12 @@ def about(request):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
 
-    if request.user.is_authenticated():
-        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+    if request.user.is_superuser:
+         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats}
     else:
+        if request.user.is_authenticated():
+         context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+        else:
          context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
 
     return render(request, 'AboutUs.html', context)
@@ -120,9 +133,13 @@ def manage(request):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
     event = Event.objects.all()
-    if request.user.is_authenticated():
-        context = {'my_template': 'LoggedInTemplate.html','category': categories, 'subcategory': subcats, 'event': event}
+
+    if request.user.is_superuser:
+         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats}
     else:
+        if request.user.is_authenticated():
+            context = {'my_template': 'LoggedInTemplate.html','category': categories, 'subcategory': subcats, 'event': event}
+        else:
          context = {'my_template': 'NotLoggedIn.html','category': categories, 'subcategory': subcats, 'event': event}
 
     return render(request, 'manage.html', context)
@@ -134,9 +151,12 @@ def main(request):
     subcats = SubCategory.objects.all()
     event = Event.objects.all()
     popular = Event.objects.all().order_by('-score')
-    if request.user.is_authenticated():
-        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats,'event': event}
+    if request.user.is_superuser:
+         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats ,'event': event}
     else:
+        if request.user.is_authenticated():
+            context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats,'event': event}
+        else:
          context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats,'event': event}
 
     return render(request, 'MainPage.html', context)
@@ -145,10 +165,13 @@ def mainFilter(request,category_name):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
     event = Event.objects.filter(category__name = category_name)
-    if request.user.is_authenticated():
-        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats,'event': event}
+    if request.user.is_superuser:
+         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats,'event': event}
     else:
-         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats,'event': event}
+        if request.user.is_authenticated():
+            context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats,'event': event}
+        else:
+            context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats,'event': event}
 
     return render(request, 'MainPage.html', context)
 
@@ -156,10 +179,13 @@ def mainFilterSub(request,category_name, subcategory_name):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
     event = Event.objects.filter(category__name = category_name).filter(subCategory__name = subcategory_name)
-    if request.user.is_authenticated():
-        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats,'event': event}
+    if request.user.is_superuser:
+         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats,'event': event}
     else:
-         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats,'event': event}
+        if request.user.is_authenticated():
+            context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats,'event': event}
+        else:
+            context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats,'event': event}
 
     return render(request, 'MainPage.html', context)
 
@@ -168,10 +194,13 @@ def home(request):
     subcats = SubCategory.objects.all()
     newEvents = Event.objects.all().order_by('-date')
     popular = Event.objects.all().order_by('-score')
-    if request.user.is_authenticated():
-        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular}
+    if request.user.is_superuser:
+         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular}
     else:
-         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular}
+        if request.user.is_authenticated():
+            context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular}
+        else:
+            context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular}
 
     return render(request, 'homepage.html', context)
 
@@ -179,29 +208,38 @@ def event(request, event_id):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
     event = Event.objects.all().filter(id=event_id)
-    if request.user.is_authenticated():
-        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats, 'event': event}
+    if request.user.is_superuser:
+         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats, 'event': event}
     else:
-         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats, 'event': event}
+        if request.user.is_authenticated():
+            context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats, 'event': event}
+        else:
+             context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats, 'event': event}
 
     return render(request, 'event.html', context)
 
 def report(request):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
-    if request.user.is_authenticated():
-        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+    if request.user.is_superuser:
+         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats}
     else:
-         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+        if request.user.is_authenticated():
+            context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+        else:
+            context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
 
     return render(request, 'report.html', context)
 
 def contact(request):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
-    if request.user.is_authenticated():
-        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+    if request.user.is_superuser:
+         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats}
     else:
+        if request.user.is_authenticated():
+            context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+        else:
          context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
 
     return render(request, 'contact.html', context)
@@ -210,10 +248,13 @@ def contact(request):
 def event_report(request):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
-    if request.user.is_authenticated():
-        context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+    if request.user.is_superuser:
+         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats}
     else:
-         context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+        if request.user.is_authenticated():
+            context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+        else:
+            context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
 
     return render(request, 'EventReport.html', context)
 
@@ -278,7 +319,7 @@ def EditEvent(request,event_id):
     else:
         form = EventForm()
 
-    context = {'form': form, 'my_template': 'LoggedInTemplate.html', 'sub_cats_list': sub_cats_list,'categories': categories,'subcats' : subcats}
+    context = {'form': form, 'my_template': 'adminTemplate.html', 'sub_cats_list': sub_cats_list,'categories': categories,'subcats' : subcats}
     return render(request, 'eventSubmit.html',context)
 
 def Logout(request):

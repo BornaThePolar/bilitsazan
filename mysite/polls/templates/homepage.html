@@ -166,30 +166,30 @@
     <div class="ui pointing dropdown link item"  onclick="window.location='/main';">
       <span class="text">Events</span>
       <i class="dropdown icon"></i>
-      <div class="menu">
+      <div class="menu" style="z-index: 100">
 
 
-        <a class="item" onclick="window.location='/main';" ><i class="dropdown icon"></i>
-          Concert
-          <div class="menu">
-            <div class="item">Pop</div>
-            <div class="item">Rock</div>
-            <div class="item">Metal</div>
-            <div class="item">Country</div>
-            <div class="item">Classic</div>
+       <i class="dropdown icon"></i>
+             {% for category in categories %}
 
-          </div></a>
-        <a class="item" onclick="window.location='/main';" >Theatre</a>
-        <a class="item" onclick="window.location='/main';" >Cinema</a>
-        <a class="item" onclick="window.location='/main';" >Others</a>
+                 <div class="item">
+                 {{ category.name }}
+                <div class="menu">
+                    {% for subcat in subcats %}
+                        {% if subcat.daste == category %}
+                            <div class="item"> {{ subcat.name }}</div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+      </div>
+            {% endfor %}
+
       </div>
     </div>
     <a class="item" class="item"onclick="window.location='/contact';">Contact Us</a>
     <a class="item" onclick="window.location='/about';" >About US</a>
     <div class="right menu">
        <div class="item"><div class="ui icon input">
-  <input type="text" placeholder="Search...">
-         <i class="search icon"></i>
 </div></div>
       <div class="item">
         <a class="ui button" onclick="window.location='/login';" >User Profile</a>
@@ -203,8 +203,8 @@
 
 <!-- Sidebar Menu -->
 <div class="ui vertical inverted sidebar menu">
-  <a class=" item">Home</a>
-  <div class="ui pointing dropdown link item" onclick="window.location='MainPage.html';">
+  <a class=" item"onclick="window.location='/home';">Home</a>
+  <div class="ui pointing dropdown link item" onclick="window.location='/main';">
     <span class="text">Events</span>
 
     <div class="menu">
@@ -237,32 +237,33 @@
         <a  class="active brown item"> Home</a>
         <div class="ui pointing dropdown link item" onclick="window.location='/main';">
           <span class="text">Events</span>
-          <i class="dropdown icon"></i>
-          <div class="menu">
+      <i class="dropdown icon"></i>
+      <div class="menu" style="z-index: 100">
 
 
-            <a class="item" onclick="window.location='/main';" ><i class="dropdown icon"></i>
-              Concert
-              <div class="menu">
-                <div class="item">Pop</div>
-                <div class="item">Rock</div>
-                <div class="item">Metal</div>
-                <div class="item">Country</div>
-                <div class="item">Classic</div>
+       <i class="dropdown icon"></i>
+             {% for category in categories %}
 
-              </div></a>
-            <a class="item" onclick="window.location='/main';" >Theatre</a>
-            <a class="item"onclick="window.location='/main';" >Cinema</a>
-            <a class="item"onclick="window.location='/main';" >Others</a>
-          </div>
+                 <div class="item">
+                 {{ category.name }}
+                <div class="menu">
+                    {% for subcat in subcats %}
+                        {% if subcat.daste == category %}
+                            <div class="item"> {{ subcat.name }}</div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+      </div>
+            {% endfor %}
+
+      </div>
         </div>
         <a class="item" class="item"onclick="window.location='/contact';">Contact Us</a>
         <a class="item" onclick="window.location='/about';" >About US</a>
 
         <div class="right item">
           <div class="item"><div class="ui icon input">
-  <input type="text" placeholder="Search...">
-         <i class="search icon"></i>
+
 </div></div>
           <a class="ui inverted brown button" onclick="window.location='/login';" >User Profile</a>
           <a class="ui inverted olive button" onclick="window.location='/logout';" >Sign out</a>
