@@ -1,6 +1,8 @@
 import datetime
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.aggregates import Sum
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
@@ -28,17 +30,28 @@ class Ticket(models.Model):
 class Event(models.Model):
     #user=models.ForeignKey('UserProfile')
     date=models.DateField()
-    ticketsLeft=models.IntegerField()
-    ticketsSold=models.IntegerField(default=0)
+    # ticketsLeft=models.IntegerField()
+    # ticketsSold=models.IntegerField(default=0)
     category = models.ForeignKey('Category')
     subCategory = models.ForeignKey('SubCategory')
     description= models.TextField()
     subject=models.CharField(max_length=32)
     finishDate=models.DateField()
-    price=models.IntegerField()
+    # price=models.IntegerField()
     photo = models.FileField(upload_to='event_photoes/')
     #scoredUsers = models.ForeignKey('Scorers', null=True)
     score=models.FloatField(default=3.5)
+
+    def ticketsLeft(self):
+        return self.eventtickettype_set.all().aggregate(x=Sum('tickets'))['x'] or 0
+
+
+class EventTicketType(models.Model):
+    name = models.CharField(max_length=50)
+    event = models.ForeignKey('Event')
+    price = models.IntegerField()
+    tickets = models.IntegerField()
+
 
 class Scorers(models.Model):
     scorers= models.ManyToManyField('UserProfile')

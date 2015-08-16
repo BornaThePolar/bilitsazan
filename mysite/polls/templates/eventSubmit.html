@@ -18,7 +18,9 @@
                         {{ form.as_p }}
 
                     </div>
-
+                    <table>
+                    {{ formset.as_table }}
+                    </table>
                     <input type="submit" class="ui fluid large teal submit button" >
                 </div>
 
@@ -58,19 +60,19 @@
         $("#id_price").keypress(function(event) {
             // if (event.which == 13) {
             // event.preventDefault();
-            console.log('fuck you')
+            console.log('fuck you');
             // }
         });
         document.ready(function(){
             $('.modal')
                 .modal('show')
-        })
+        });
 
-        var x = $('#id_price').text()
+        var x = $('#id_price').text();
         var temp='<div class'+'="form-group"><input placeholder'+'=type" type" required'+'="" type'+'="text" /></div>'+'<div class'+'="form-group"><input placeholder'+'=Number" type" required'+'="" type'+'="text" /></div>'
-        console.log(x)
+        console.log(x);
         for(var i=0;i<x;i++){
-            $('#id_price').insertAfter(temp)
+            $('#id_price').insertAfter(temp);
         }
 
 

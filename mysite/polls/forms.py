@@ -1,5 +1,6 @@
 from django import forms
-from polls.models import Event
+from django.forms.models import inlineformset_factory
+from polls.models import Event, EventTicketType
 
 
 class Register(forms.Form):
@@ -29,6 +30,6 @@ class EventSubmit(forms.Form):
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ('subject', 'description', 'category', 'subCategory', 'photo', 'date', 'finishDate', 'ticketsLeft', 'price')
+        fields = ('subject', 'description', 'category', 'subCategory', 'photo', 'date', 'finishDate', )
 
-
+TicketTypeFormSet = inlineformset_factory(Event, EventTicketType, fields=('name', 'price', 'tickets'))
