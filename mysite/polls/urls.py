@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^home/$', views.home, name='home'),
     url(r'^event/(?P<event_id>\d+)$', views.event, name='event'),
     url(r'^report/$', views.report, name='report'),
+    url(r'^alltickets/$', views.all_tickets, name='alltickets'),
     url(r'^contact/$', views.contact, name='contact'),
     url(r'^eventreport/$', views.event_report, name='contact'),
     url(r'^manage/$', views.manage, name='manage'),

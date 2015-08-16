@@ -12,6 +12,10 @@ from polls.forms import EventForm
 from polls.models import Category,SubCategory
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
+from polls.models import UserProfile
+from django.contrib.auth.models import User
+
+
 
 from .forms import Register
 from .forms import EventSubmit
@@ -21,14 +25,31 @@ def register(request):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
 
-    if request.user.is_superuser:
-         context = {'form': form,'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats}
-    else :
-        if request.user.is_authenticated():
-            context = {'form': form,'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
-        else:
-            context = {'form': form,'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
 
+    user = UserProfile()
+    if request.method== 'POST':
+        print('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy')
+        form=Register(request.POST)
+        if form.is_valid():
+           # valid = True
+            if form.cleaned_data['password'] != form.cleaned_data['passwordRetype']:
+                form._errors["password"] = ErrorList([u"Passwords do not match"])
+            user.user=User.objects._create_user(form.cleaned_data['userName'],form.cleaned_data['email'],form.cleaned_data['password'],False,False,first_name=form.cleaned_data['name'],last_name=form.cleaned_data['lastName'])
+
+           # user.user.first_name=form.cleaned_data['name']
+          #  user.user.last_name=form.cleaned_data['lastName']
+            user.birthday=form.cleaned_data['birthday']
+            #user.photo=None
+            #user.follower=[]
+            #user.following=[]
+            user.save()
+            return HttpResponseRedirect('/main/')
+    else:
+        print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+        form=Register()
+
+
+    context = {'form': form,'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
     return render(request, 'register.html', context)
 
 
@@ -232,6 +253,22 @@ def report(request):
             context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
 
     return render(request, 'report.html', context)
+
+
+def all_tickets(request):
+    categories = Category.objects.all()
+    subcats = SubCategory.objects.all()
+
+    if request.user.is_superuser:
+         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats}
+    else:
+        if request.user.is_authenticated():
+            context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+        else:
+            context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+
+    return render(request, 'ticketHistory.html', context)
+
 
 def contact(request):
     categories = Category.objects.all()

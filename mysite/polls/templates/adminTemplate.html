@@ -3,7 +3,7 @@
     <div class="ui large top inverted fixed menu" style="background-color: #008080;">
   <div class="ui container" >
     <a class="item" onclick="window.location='/home';" >Home</a>
-    <div class="ui pointing dropdown link item" onclick="window.location='/main';">
+    <div class="ui pointing dropdown link item" >
       <span class="text">Events</span>
       <i class="dropdown icon"></i>
       <div class="menu" style="z-index: 100">
@@ -12,12 +12,12 @@
        <i class="dropdown icon"></i>
              {% for category in categories %}
 
-                 <div class="item">
+                 <div class="item" onclick="window.location='/main/{{ category.name }}';">
                  {{ category.name }}
                 <div class="menu">
                     {% for subcat in subcats %}
                         {% if subcat.daste == category %}
-                            <div class="item"> {{ subcat.name }}</div>
+                            <div class="item" onclick="subcat(event,{{ category.name }},{{ subcat.name }})"> {{ subcat.name }}</div>
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -32,7 +32,7 @@
       <div class="item"><div class="ui icon input">
 
 </div></div>
-       <div class="item">
+      <div class="item">
         <a class="ui inverted blue basic button" onclick="window.location='/eventsubmit';"> <i class="user icon"></i>New Event</a>
       </div>
 
