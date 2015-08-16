@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from polls.forms import EventForm, TicketTypeFormSet
-from polls.models import Category,SubCategory, Event
+from polls.models import Category,SubCategory, Event, EventTicketType
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
 
@@ -93,17 +93,26 @@ def eventSubmit(request):
 
 
 
-def buy(request):
+def buy(request, event_id):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
 
+    event = Event.objects.get(id=event_id)
+
+    typ = EventTicketType.objects.get(id=request.POST.get('type'))
+    count = int(request.POST.get('numoftickets'))
+
+    if count > typ.tickets:
+        return HttpResponseRedirect('/event/%s?error=1' % event_id)
+
     if request.user.is_superuser:
-         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats}
+        context = {'my_template': 'adminTemplate.html', 'categories': categories, 'subcats': subcats, 'event': event}
     else:
         if request.user.is_authenticated():
-            context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+            context = {'my_template': 'LoggedInTemplate.html', 'categories': categories, 'subcats': subcats,
+                       'event': event}
         else:
-            context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+            context = {'my_template': 'NotLoggedIn.html', 'categories': categories, 'subcats': subcats, 'event': event}
 
     return render(request, 'buy.html', context)
 
@@ -231,13 +240,18 @@ def event(request, event_id):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
     event = Event.objects.all().filter(id=event_id)
+
+    error = request.GET.get('error', 0)
     if request.user.is_superuser:
-         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats, 'event': event}
+        context = {'my_template': 'adminTemplate.html', 'categories': categories, 'subcats': subcats, 'event': event,
+                   'error': error}
     else:
         if request.user.is_authenticated():
-            context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats, 'event': event}
+            context = {'my_template': 'LoggedInTemplate.html', 'categories': categories, 'subcats': subcats,
+                       'event': event, 'error': error}
         else:
-             context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats, 'event': event}
+            context = {'my_template': 'NotLoggedIn.html', 'categories': categories, 'subcats': subcats, 'event': event,
+                       'error': error}
 
     return render(request, 'event.html', context)
 
