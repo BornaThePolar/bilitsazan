@@ -135,7 +135,7 @@ def manage(request):
     event = Event.objects.all()
 
     if request.user.is_superuser:
-         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats}
+         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats, 'event': event}
     else:
         if request.user.is_authenticated():
             context = {'my_template': 'LoggedInTemplate.html','category': categories, 'subcategory': subcats, 'event': event}
