@@ -88,6 +88,17 @@
             });
         });
 
+            $(function () {
+            var optionSelected = $("select#id_category option:selected");
+
+            var valueSelected = $('select#id_category').val();
+            $('select#id_subCategory').empty();
+            $.each(sub_cats[valueSelected], function (value, key) {
+                $('select#id_subCategory').append($("<option></option>").attr("value", value).text(key));
+            });
+        });
+
+
             $('#add-type').click(function () {
                 console.log('clicked');
                 function get_ticket_type(num) {

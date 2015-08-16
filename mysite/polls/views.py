@@ -334,9 +334,8 @@ def RemoveEvent(request, event_id):
     return HttpResponseRedirect('/manage/')
 
 def EditEvent(request,event_id):
-    event = Event.objects.filter(id=event_id)
-    if event is not None:
-        event.delete()
+    event = Event.objects.get(id=event_id)
+
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
     sub_cats_list = {}
@@ -348,16 +347,23 @@ def EditEvent(request,event_id):
         sub_cats_list[cat.id] = l
 
     if request.method == 'POST':
-        form = EventForm(request.POST, request.FILES)
+        form = EventForm(request.POST, request.FILES, instance=event)
         if form.is_valid():
             event = form.save(commit=False)
+            formset = TicketTypeFormSet(request.POST, request.FILES, instance=event)
             #event.user_id = request.user.userprofile.id
-            event.save()
+            if formset.is_valid():
+                event.save()
+                formset.save()
             return HttpResponseRedirect('/manage/')
+        else:
+            formset = TicketTypeFormSet(request.POST, request.FILES, instance=event)
     else:
-        form = EventForm()
+        form = EventForm(instance=event)
+        formset = TicketTypeFormSet(instance=event)
 
-    context = {'form': form, 'my_template': 'adminTemplate.html', 'sub_cats_list': sub_cats_list,'categories': categories,'subcats' : subcats}
+    context = {'form': form, 'my_template': 'adminTemplate.html', 'sub_cats_list': sub_cats_list,
+               'categories': categories, 'subcats': subcats, 'formset': formset}
     return render(request, 'eventSubmit.html',context)
 
 def Logout(request):
