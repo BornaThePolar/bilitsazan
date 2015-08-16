@@ -21,7 +21,7 @@ from .forms import Register
 from .forms import EventSubmit
 
 def register(request):
-    form=Register(request.POST or None)
+
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
 
