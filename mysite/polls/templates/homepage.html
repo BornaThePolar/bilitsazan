@@ -356,6 +356,9 @@
                 <div class="meta">
                   <span class="cinema">{{ event.date }}</span>
                 </div>
+                {% if event.min_price %}<div class="meta">
+                  <span class="cinema">{{ event.min_price }}</span>
+                </div>{% endif %}
                 <div class="description">
                   <p></p>
                 </div>
@@ -398,6 +401,9 @@
                 <div class="meta">
                   <span class="cinema">{{ event.date }}</span>
                 </div>
+                {% if event.min_price %}<div class="meta">
+                  <span class="cinema">{{ event.min_price }}</span>
+                </div>{% endif %}
                 <div class="meta">
                   <span class="cinema">Rate: {{ event.score }}</span>
                 </div>

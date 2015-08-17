@@ -1,7 +1,7 @@
 import datetime
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.aggregates import Sum
+from django.db.models.aggregates import Sum, Min
 
 
 class UserProfile(models.Model):
@@ -46,6 +46,8 @@ class Event(models.Model):
     def ticketsLeft(self):
         return self.eventtickettype_set.all().aggregate(x=Sum('tickets'))['x'] or 0
 
+    def min_price(self):
+        return self.eventtickettype_set.all().aggregate(x=Min('price'))['x'] or 0
 
 class EventTicketType(models.Model):
     name = models.CharField(max_length=50)
