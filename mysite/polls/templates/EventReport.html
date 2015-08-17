@@ -43,6 +43,16 @@
             <div class="ui middle centered aligned stackable grid container">
                 <div class="row">
                     <div class="twelve wide column">
+                    <form method="post" class="ui form">
+                        {% csrf_token %}
+                        <div class="field">
+                            From: <input name="start" type="date" style="display: inline; width: 30%">
+                            To: <input name="finish" type="date" style="display: inline; width: 30%">
+                        <button class="ui blue button"  type="submit">Search</button>
+                        </div>
+
+                    </form>
+
                         <h2>Azadi Cinema</h2>
                         <div class="ui divided items">
                             {% for event in event %}

@@ -351,6 +351,10 @@ def event_report(request):
     order = Order.objects.all()
     numberOfOrders={}
     money={}
+    if request.method == "POST":
+        start=request.POST.get('start', None)
+        finish = request.POST.get('finish', None)
+        event = Event.objects.filter(date__range=[start,finish])
     for eve in event:
         numberOfOrders[eve.id]=0
         money[eve.id]=0
