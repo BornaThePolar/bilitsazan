@@ -30,6 +30,6 @@ class EventSubmit(forms.Form):
 class EventForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = ('subject', 'description', 'category', 'subCategory', 'photo', 'date', 'finishDate', )
+        fields = ('subject', 'description', 'category', 'subCategory', 'photo', 'date', 'finishDate', 'location')
 
 TicketTypeFormSet = inlineformset_factory(Event, EventTicketType, fields=('name', 'price', 'tickets'))

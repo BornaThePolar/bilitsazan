@@ -41,6 +41,7 @@ class Event(models.Model):
     scoredUsers = models.ManyToManyField('UserProfile', null=True)
     score=models.FloatField(default=0)
     numberofScorers=models.IntegerField(default=0)
+    location = models.CharField(max_length=50)
 
     def ticketsLeft(self):
         return self.eventtickettype_set.all().aggregate(x=Sum('tickets'))['x'] or 0

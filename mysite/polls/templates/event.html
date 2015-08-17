@@ -62,6 +62,7 @@
 
 
                     <h5> Only until {{ event.finishDate }} </h5>
+                    {% if event.location %}<h5> At {{ event.location }} </h5>{% endif %}
                     <h5> {{ event.category }} <i class="angle right icon"></i> {{ event.subCategory }}</h5>
                 </div>
 
