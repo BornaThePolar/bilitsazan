@@ -38,7 +38,8 @@ class Event(models.Model):
     # price=models.IntegerField()
     photo = models.FileField(upload_to='event_photoes/')
     #scoredUsers = models.ForeignKey('Scorers', null=True)
-    score=models.FloatField(default=3.5)
+    score=models.FloatField(default=0)
+    numberofScorers=models.IntegerField(default=0)
 
     def ticketsLeft(self):
         return self.eventtickettype_set.all().aggregate(x=Sum('tickets'))['x'] or 0

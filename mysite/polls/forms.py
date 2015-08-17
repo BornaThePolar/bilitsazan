@@ -7,7 +7,7 @@ class Register(forms.Form):
     name=forms.CharField(max_length=32,required=True,label='name', widget=forms.TextInput(attrs={'placeholder': 'name','required': ''}))
     lastName=forms.CharField(max_length=32,required=True,label='family name', widget=forms.TextInput(attrs={'placeholder': 'family name','required': ''}))
     gender = forms.ChoiceField(choices=[ ('', '----'),(1,'male'),(2,'female')],)
-    phoneNumber=forms.IntegerField(label='phone number'  ,  widget=forms.TextInput(attrs={'placeholder':'phone number','required': ''}))
+    #phoneNumber=forms.IntegerField(label='phone number'  ,  widget=forms.TextInput(attrs={'placeholder':'phone number','required': ''}))
     email=forms.EmailField(required=True,label='Email', widget=forms.TextInput(attrs={'placeholder': 'Email','required': ''}))
     userName=forms.CharField(max_length=32,required=True,label='username', widget=forms.TextInput(attrs={'placeholder': 'username','required': ''}))
     password=forms.CharField(max_length=32,required=True,label='password' , widget=forms.TextInput(attrs={'placeholder': 'passwprd','required': '','type': 'password'}),error_messages = {'invalid': 'Passwords do not match'})

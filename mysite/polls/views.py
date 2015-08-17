@@ -5,9 +5,6 @@ from polls.models import Category,SubCategory, Event, EventTicketType, Order
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
 
-from .forms import Register
-from .forms import EventSubmit
-
 from django.shortcuts import render
 from polls.forms import EventForm
 from polls.models import Category,SubCategory
@@ -15,6 +12,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from polls.models import UserProfile
 from django.contrib.auth.models import User
+from django.forms.util import ErrorList
 
 
 
@@ -32,17 +30,10 @@ def register(request):
         print('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy')
         form=Register(request.POST)
         if form.is_valid():
-           # valid = True
             if form.cleaned_data['password'] != form.cleaned_data['passwordRetype']:
                 form._errors["password"] = ErrorList([u"Passwords do not match"])
             user.user=User.objects._create_user(form.cleaned_data['userName'],form.cleaned_data['email'],form.cleaned_data['password'],False,False,first_name=form.cleaned_data['name'],last_name=form.cleaned_data['lastName'])
-
-           # user.user.first_name=form.cleaned_data['name']
-          #  user.user.last_name=form.cleaned_data['lastName']
-            user.birthday=form.cleaned_data['birthday']
-            #user.photo=None
-            #user.follower=[]
-            #user.following=[]
+            user.gender=form.cleaned_data['gender']
             user.save()
             return HttpResponseRedirect('/main/')
     else:
@@ -235,8 +226,8 @@ def mainFilterSub(request,category_name, subcategory_name):
 def home(request):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
-    newEvents = Event.objects.all().order_by('-date')
-    popular = Event.objects.all().order_by('-score')
+    newEvents = Event.objects.all().order_by('-date')[:6]
+    popular = Event.objects.all().order_by('-score')[:6]
     if request.user.is_superuser:
          context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular}
     else:
@@ -401,3 +392,19 @@ def EditEvent(request,event_id):
 def Logout(request):
  logout(request)
  return HttpResponseRedirect('/login/')
+
+def eventRate(request, event_id, rate):
+    event=Event.objects.all().filter(id=event_id)[0]
+    #user = UserProfile.objects.all().filter(id=user_id)[0]
+    categories = Category.objects.all()
+    subcats = SubCategory.objects.all()
+    if event.numberofScorers==0:
+        event.score=rate
+        event.numberofScorers+=1
+    else:
+        event.score=(event.score*event.numberofScorers+float(rate))/(event.numberofScorers+1)
+        event.numberofScorers+=1
+    event.save()
+    print(event.score)
+    print(rate)
+    return HttpResponseRedirect('/event/'+event_id)

@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^removeEvent/(?P<event_id>\d+)/$', views.RemoveEvent, name='RemoveEvent'),
     url(r'^editEvent/(?P<event_id>\d+)/$', views.EditEvent, name='EditEvent'),
     url(r'^logout/$', views.Logout, name='logout'),
+    url(r'^event/rate/(?P<event_id>\d+)/(?P<rate>\d+)$', views.eventRate, name='eventRate'),
 
 
 

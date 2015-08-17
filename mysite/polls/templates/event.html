@@ -83,9 +83,6 @@
                                 <p>{{ event.description }}
                                 </p>
                             </div>
-                            {% if error %}<div class="ui warning message">You tried to buy seats more than tickets remaining</div>{% endif %}
-                            {% if order %}<div class="ui positive message"><div class="header">You have purchased {{ order.number }} of {{ order.ticket_type.name }}.</div>
-                                Your purchase code is: <b>{{ order.rahgiriCode }}</b></div>{% endif %}
                         </div>
                         <div class="four wide column">
                             <h2> Rate! </h2>
@@ -153,7 +150,7 @@
                                     <textarea></textarea>
                                 </div>
                                 <div class="ui blue labeled submit icon button">
-                                    <i class="icon edit"></i> Add Reply
+                                    <i class="icon edit"></i> Add Comment
                                 </div>
                             </form>
                         </div>
@@ -172,25 +169,34 @@
             <div class="ui segment" style="margin: 0; padding: 0">
                 <div class="row" style="margin: 20px">
 
+                    <div class="five wide column">
+                        <form class="ui form">
+                            <h2> Dates </h2>
+                            <div class="field">
+                                <label> dd/mm hour </label>
+                                <select class="ui fluid search dropdown" name="dates">
+                                    <option value="">17/05 5:22</option>
+                                    <option value="1">18/05 6:00</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
                     <div class="six wide column">
-                        <form class="ui form" action="/buy/{{ event.id }}" method="post">
-                            {% csrf_token %}
+                        <form class="ui form">
                             <h2> Tickets </h2>
                             <div class="fields">
                                 <div class="three wide field" >
                                     <label> Tickets left: </label>
                                     <div>
-                                        {% for typ in event.eventtickettype_set.all %}
-                                        <span>{{ typ.tickets }} from {{ typ.name }}</span><br>
-                                            {% endfor %}
+                                        <p>7 from 80</p>
                                     </div>
                                 </div>
                                 <div class="five wide field">
                                     <label> Types of tickets </label>
-                                    <select class="ui fluid search dropdown" name="type">
-                                        {% for typ in event.eventtickettype_set.all %}
-                                        <option value="{{ typ.id }}">{{ typ.name }}</option>
-                                        {% endfor %}
+                                    <select class="ui fluid search dropdown" name="tickets">
+                                        <option value="">VIP-1900IRR</option>
+                                        <option value="1">Normal-100IRR</option>
                                     </select>
                                 </div>
                                 <div class="four wide field">
@@ -202,7 +208,7 @@
                                 <div class="one wide field">
                                 </div>
                                 <div class="four">
-                                    <input class="big ui button" type="submit" style="background-color: #008080; color: white" value="Buy now!">
+                                    <div class="big ui button" type="submit" style="background-color: #008080;"><a onclick="window.location='/buy';" style="color: white">Buy now!</a></div>
                                 </div>
                             </div>
 
@@ -210,7 +216,7 @@
                     </div>
                 </div>
             </div>
-
+        <input type="hidden" value="{{ user.id }}">
         </div>
         <script>
             var score=0;
@@ -222,49 +228,68 @@
 
 
             })
+            {#            function getRating() {#}
+            {#    var currentRating = $('.rating').rating('get rating');#}
+            {#    alert('Current rating is: ' + currentRating);#}
+
+
+            // Add javascript here
+
+            //$('.ui.rating')
+
             $(document).ready(function(){
                 $('.rating')
-
+                        {#                    .rating('setting', 'onRate', function(value) {#}
+                        {#                    var currentRating = value#}
+                        {#                     alert('Current rating is: ' + currentRating);#}
+                        {#                        })#}
                         {% if event.score >= 0 and event.score < 1 %}
                             .rating({
                                     initialRating: 0,
                                     maxRating: 5
+
                                 })
+
                         {% endif %}
-                        {% if event.score >= 1 and event.score < 2 %}
-                            .rating({
-                                    initialRating: 1,
-                                    maxRating: 5
-                                })
-                        {% endif %}
-                        {% if event.score >= 2 and event.score < 3 %}
-                            .rating({
-                                    initialRating: 2,
-                                    maxRating: 5
-                                })
-                        {% endif %}
-                        {% if event.score >= 3 and event.score < 4 %}
-                            .rating({
-                                    initialRating: 3,
-                                    maxRating: 5
-                                })
-                        {% endif %}
-                        {% if event.score >= 4 and event.score < 5 %}
-                            .rating({
-                                    initialRating: 4,
-                                    maxRating: 5
-                                })
-                        {% endif %}
-                        {% if event.score == 5 %}
-                            .rating({
-                                    initialRating: 5,
-                                    maxRating: 5
-                                })
-                        {% endif %}
+                    {% if event.score >= 1 and event.score < 2 %}
+                        .rating({
+                                initialRating: 1,
+                                maxRating: 5
+                            })
+                    {% endif %}
+                    {% if event.score >= 2 and event.score < 3 %}
+                        .rating({
+                                initialRating: 2,
+                                maxRating: 5
+                            })
+                    {% endif %}
+                    {% if event.score >= 3 and event.score < 4 %}
+                        .rating({
+                                initialRating: 3,
+                                maxRating: 5
+                            })
+                    {% endif %}
+                    {% if event.score >= 4 and event.score < 5 %}
+                        .rating({
+                                initialRating: 4,
+                                maxRating: 5
+                            })
+                    {% endif %}
+                    {% if event.score == 5 %}
+                        .rating({
+                                initialRating: 5,
+                                maxRating: 5
+                            })
+                    {% endif %}
+                    .rating('setting', 'onRate', function(event) {
+                        var current = event
+                        window.location='/event/rate/{{ event.id }}/'+current
+                    })
 
 
 
-            })
+            });
+
 
             $('.dropdown').dropdown({on:'hover'});
 
