@@ -29,6 +29,10 @@ from django.template.defaulttags import register
 def get_item(dictionary, key):
     return dictionary.get(key)
 
+def redir(request):
+    return HttpResponseRedirect('/home/')
+
+
 def register(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect('/main/')
@@ -447,15 +451,19 @@ def Logout(request):
 
 def eventRate(request, event_id, rate):
     event=Event.objects.all().filter(id=event_id)[0]
-    #user = UserProfile.objects.all().filter(id=user_id)[0]
+    user = UserProfile.objects.all().filter(id=event_id)[0]
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
-    if event.numberofScorers==0:
-        event.score=rate
-        event.numberofScorers+=1
-    else:
-        event.score=(event.score*event.numberofScorers+float(rate))/(event.numberofScorers+1)
-        event.numberofScorers+=1
+    if user not in event.scoredUsers.all():
+        if event.numberofScorers==0:
+            event.score=rate
+            event.numberofScorers+=1
+        else:
+            event.score=(event.score*event.numberofScorers+float(rate))/(event.numberofScorers+1)
+            event.numberofScorers+=1
+        event.scoredUsers.add(user)
+
+
     event.save()
     print(event.score)
     print(rate)

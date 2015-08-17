@@ -38,7 +38,7 @@ class Event(models.Model):
     finishDate=models.DateField()
     #price=models.IntegerField()
     photo = models.FileField(upload_to='event_photoes/')
-    #scoredUsers = models.ForeignKey('Scorers', null=True)
+    scoredUsers = models.ManyToManyField('UserProfile', null=True)
     score=models.FloatField(default=0)
     numberofScorers=models.IntegerField(default=0)
 
