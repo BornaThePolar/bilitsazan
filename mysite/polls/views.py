@@ -5,6 +5,9 @@ from polls.models import Category,SubCategory, Event, EventTicketType, Order
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
 
+from .forms import Register
+from .forms import EventSubmit
+
 from django.shortcuts import render
 from polls.forms import EventForm
 from polls.models import Category,SubCategory

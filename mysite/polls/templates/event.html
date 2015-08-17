@@ -83,6 +83,9 @@
                                 <p>{{ event.description }}
                                 </p>
                             </div>
+                            {% if error %}<div class="ui warning message">You tried to buy seats more than tickets remaining</div>{% endif %}
+                            {% if order %}<div class="ui positive message"><div class="header">You have purchased {{ order.number }} of {{ order.ticket_type.name }}.</div>
+                                Your purchase code is: <b>{{ order.rahgiriCode }}</b></div>{% endif %}
                         </div>
                         <div class="four wide column">
                             <h2> Rate! </h2>
@@ -169,34 +172,25 @@
             <div class="ui segment" style="margin: 0; padding: 0">
                 <div class="row" style="margin: 20px">
 
-                    <div class="five wide column">
-                        <form class="ui form">
-                            <h2> Dates </h2>
-                            <div class="field">
-                                <label> dd/mm hour </label>
-                                <select class="ui fluid search dropdown" name="dates">
-                                    <option value="">17/05 5:22</option>
-                                    <option value="1">18/05 6:00</option>
-                                </select>
-                            </div>
-                        </form>
-                    </div>
-
                     <div class="six wide column">
-                        <form class="ui form">
+                        <form class="ui form" action="/buy/{{ event.id }}" method="post">
+                            {% csrf_token %}
                             <h2> Tickets </h2>
                             <div class="fields">
                                 <div class="three wide field" >
                                     <label> Tickets left: </label>
                                     <div>
-                                        <p>7 from 80</p>
+                                        {% for typ in event.eventtickettype_set.all %}
+                                        <span>{{ typ.tickets }} from {{ typ.name }}</span><br>
+                                            {% endfor %}
                                     </div>
                                 </div>
                                 <div class="five wide field">
                                     <label> Types of tickets </label>
-                                    <select class="ui fluid search dropdown" name="tickets">
-                                        <option value="">VIP-1900IRR</option>
-                                        <option value="1">Normal-100IRR</option>
+                                    <select class="ui fluid search dropdown" name="type">
+                                        {% for typ in event.eventtickettype_set.all %}
+                                        <option value="{{ typ.id }}">{{ typ.name }}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                                 <div class="four wide field">
@@ -208,7 +202,7 @@
                                 <div class="one wide field">
                                 </div>
                                 <div class="four">
-                                    <div class="big ui button" type="submit" style="background-color: #008080;"><a onclick="window.location='/buy';" style="color: white">Buy now!</a></div>
+                                    <input class="big ui button" type="submit" style="background-color: #008080; color: white" value="Buy now!">
                                 </div>
                             </div>
 
