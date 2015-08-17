@@ -1,7 +1,7 @@
 from random import randint
 from django.shortcuts import render
 from polls.forms import EventForm, TicketTypeFormSet
-from polls.models import Category,SubCategory, Event, EventTicketType, Order, Comment
+from polls.models import Category,SubCategory, Event, EventTicketType, Order, Comment,Ticket
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
 
@@ -22,6 +22,12 @@ import datetime
 
 from .forms import Register
 from .forms import EventSubmit
+
+from django.template.defaulttags import register
+
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
 
 def register(request):
     if request.user.is_authenticated():
@@ -335,13 +341,25 @@ def contact(request):
 def event_report(request):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
+    event=Event.objects.all().order_by('date')
+    ticket = Ticket.objects.all()
+    order = Order.objects.all()
+    numberOfOrders={}
+    money={}
+    for eve in event:
+        numberOfOrders[eve.id]=0
+        money[eve.id]=0
+        for ord in order:
+            if ord.event==eve:
+                numberOfOrders[eve.id]+=ord.number
+                money[eve.id]+=ord.cost
     if request.user.is_superuser:
-         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats}
+         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats,'ticket': ticket, 'event': event, 'order':order,'number': numberOfOrders, 'money':money}
     else:
         if request.user.is_authenticated():
-            context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
+            context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats,'ticket': ticket, 'event': event, 'order':order,'number': numberOfOrders, 'money':money}
         else:
-            context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+            context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats,'ticket': ticket, 'event': event, 'order':order,'number': numberOfOrders, 'money':money}
 
     return render(request, 'EventReport.html', context)
 

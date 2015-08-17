@@ -36,7 +36,7 @@ class Event(models.Model):
     description= models.TextField()
     subject=models.CharField(max_length=32)
     finishDate=models.DateField()
-    # price=models.IntegerField()
+    #price=models.IntegerField()
     photo = models.FileField(upload_to='event_photoes/')
     #scoredUsers = models.ForeignKey('Scorers', null=True)
     score=models.FloatField(default=0)

@@ -23,7 +23,7 @@
 
 
 </head>
-<body>
+<body >
 
 
 <div class="ui two column doubling grid" style="margin-top: 80px">
@@ -35,40 +35,36 @@
 
                 <span>Print</span>
             </a>
-            <a class="item">
 
-                <span>Draw Chart</span>
-            </a>
-            <a class="item">
-                Advance
-            </a>
         </div>
     </div>
     <div class="twelve wide column" id="main-content" style="padding: 0px; margin-bottom: 50px">
-        <div class="ui vertical stripe segment">
+        <div class="ui vertical stripe segment" style="background-color: white; border-radius: 1%">
             <div class="ui middle centered aligned stackable grid container">
                 <div class="row">
                     <div class="twelve wide column">
                         <h2>Azadi Cinema</h2>
                         <div class="ui divided items">
+                            {% for event in event %}
                             <div class="item">
                                 <div class="image">
-                                    <img src={% static "image/download.jpg"%}>
+                                    <img src="/media/{{MEDIA_URL}}{{event.photo}}">
                                 </div>
                                 <div class="content">
-                                    <a class="header">4tar Concert</a>
+                                    <a class="header">{{ event.subject }}</a>
                                     <div class="meta">
-                                        <span class="cinema">Number of Tickets: 820</span>
+
+                                            <span class="cinema">Number of Tickets: {{ number|get_item:event.id }}</span>
 
                                     </div>
                                     <div class="meta">
-                                        <span class="cinema">Date: 1/1/2001</span>
+                                        <span class="cinema">{{ event.date }}</span>
                                     </div>
                                     <div class="meta">
-                                        <span class="cinema">Money Earned: 1,232,000</span>
+                                        <span class="cinema">Money Earned: {{ money|get_item:event.id }}</span>
                                     </div>
                                     <div class="meta">
-                                        <span class="cineman"> Users Rate: <div class='ui star rating'><i class='active icon'></i><i class='active icon'></i><i class='active icon'></i><i class='icon'></i><i class='icon'></i></div></span>
+                                        <span class="cineman"> Users Rate: {{ event.score }}</span>
                                     </div>
                                     <div class="description">
                                         <p></p>
@@ -76,54 +72,9 @@
 
                                 </div>
                             </div>
-                            <div class="item">
-                                <div class="image">
-                                    <img src={% static "image/hMTavgm1.jpeg"%}>
-                                </div>
-                                <div class="content">
-                                    <a class="header">Game Of Thrones</a>
-                                    <div class="meta">
-                                        <span class="cinema">Money Earned: 12,213,412</span>
-                                    </div>
-                                    <div class="meta">
-                                        <span class="cinema">Date: 1/1/2001</span>
-                                    </div>
-                                    <div class="meta">
-                                        <span class="cinema">Number of Tickets: 2</span>
-                                    </div>
-                                    <div class="meta">
-                                        <span class="cineman"> Users Rate: <div class='ui star rating'><i class='active icon'></i><i class='active icon'></i><i class='active icon'></i><i class='icon'></i><i class='icon'></i></div></span>
-                                    </div>
-                                    <div class="description">
-                                        <p></p>
-                                    </div>
+                            {% endfor %}
 
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="image">
-                                    <img src={% static "image/KSCOPE206-300.jpg"%}>
-                                </div>
-                                <div class="content">
-                                    <a class="header">Weather Systems Concert</a>
-                                    <div class="meta">
-                                        <span class="cinema">Money Earned: 1,123,143</span>
-                                    </div>
-                                    <div class="meta">
-                                        <span class="cinema">Date: 1/1/2001</span>
-                                    </div>
-                                    <div class="meta">
-                                        <span class="cinema">Number of Tickets: 2</span>
-                                    </div>
-                                    <div class="meta">
-                                        <span class="cineman"> Users Rate: <div class='ui star rating'><i class='active icon'></i><i class='active icon'></i><i class='active icon'></i><i class='icon'></i><i class='icon'></i></div></span>
-                                    </div>
-                                    <div class="description">
-                                        <p></p>
-                                    </div>
 
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -140,7 +91,7 @@
 
 
 
-<div class="ui inverted vertical footer segment">
+<div class="ui inverted vertical footer segment" style="bottom: 0; margin-bottom: 0 ">
     <div class="ui container">
         <div class="ui stackable inverted divided equal height stackable grid">
             <div class="three wide column">
