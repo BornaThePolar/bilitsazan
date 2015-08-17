@@ -51,7 +51,7 @@
         </style>
 
     </head>
-    {% for event in event %}
+
         <div class="container">
             <div  class="imageContainer" style="margin-top: 40px; height: 300px" >
                 <div style="margin-top: 50px" class="forimage">
@@ -94,12 +94,12 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="ui comments" style="margin: 20px">
+                        <div class="ui comments" style="margin: 20px; width: 400px">
                             <h3 class="ui dividing header">Comments</h3>
                             {% for comment in comments %}
                             <div class="comment">
                                 <a class="avatar">
-                                    <img src={% static 'image/0o91ui7eiu9w5rq9kg8s.jpg'%}>
+                                    <img src={% static 'image/w450h4001385925286User.png'%}>
                                 </a>
                                 <div class="content">
                                     <a class="author">{{ comment.author }}</a>
@@ -115,23 +115,7 @@
                                 </div>
                             </div>
                             {% endfor %}
-                            <div class="comment">
-                                <a class="avatar">
-                                    <img src={% static 'image/1422441_610105105750835_231996108057904485_n.jpg'%}>
-                                </a>
-                                <div class="content">
-                                    <a class="author">Bache Famil</a>
-                                    <div class="metadata">
-                                        <span class="date">5 days ago</span>
-                                    </div>
-                                    <div class="text">
-                                        Chi shode?!
-                                    </div>
-                                    <div class="actions">
-                                        <a class="reply">Reply</a>
-                                    </div>
-                                </div>
-                            </div>
+
                             <form class="ui reply form" method="post">
                                 {% csrf_token %}
                                 <div class="field">
@@ -281,7 +265,7 @@
             }
 
         </script>
-    {% endfor %}
+
     </body>
     </html>
 

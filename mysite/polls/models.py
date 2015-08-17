@@ -58,11 +58,13 @@ class Scorers(models.Model):
 
 class Comment(models.Model):
     author=models.ForeignKey('UserProfile')
+    event=models.ForeignKey('Event')
     content=models.TextField()
     time=models.DateTimeField(default=datetime.datetime.now)
-    numberOfLikes=models.IntegerField()
+    numberOfLikes=models.IntegerField(default=0)
     #likes=models.ForeignKey('Likers')
-
+    def __str__(self):
+        return self.content
 class Category(models.Model):
     name=models.CharField(max_length=32)
 

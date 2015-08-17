@@ -258,7 +258,7 @@ def home(request):
 def event(request, event_id):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
-    event = Event.objects.all().filter(id=event_id)
+    event = Event.objects.all().filter(id=event_id)[0]
     if request.method=='POST':
         commentContent=request.POST.get('content', None)
         userID = request.POST.get('user-id', None)
@@ -266,12 +266,12 @@ def event(request, event_id):
         newComment= Comment()
         newComment.content=commentContent
         newComment.author=user
-        newComment.numberOfLikes=0
         newComment.time=datetime.datetime.now()
+        newComment.event=event
         newComment.save()
     error = request.GET.get('error', 0)
     bought = request.GET.get('bought', 0)
-    comments= Comment.objects.all().order_by('-time')
+    comments= Comment.objects.all().filter(event = event).order_by('time')
     order = None
     if bought:
         order = Order.objects.get(id=bought)
