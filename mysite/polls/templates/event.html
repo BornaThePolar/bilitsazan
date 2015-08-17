@@ -85,6 +85,7 @@
                                 </p>
                             </div>
                             {% if error %}<div class="ui warning message">You tried to buy seats more than tickets remaining</div>{% endif %}
+                            <div class="ui warning message" style="display: none;">You tried to buy seats more than tickets remaining</div>
                             {% if order %}<div class="ui positive message"><div class="header">You have purchased {{ order.number }} of {{ order.ticket_type.name }}.</div>
                                 Your purchase code is: <b>{{ order.rahgiriCode }}</b></div>{% endif %}
                         </div>
@@ -118,7 +119,7 @@
                                 </div>
                             </div>
                             {% endfor %}
-
+                            {% if not request.user.is_superuser %}
                             <form class="ui reply form" method="post">
                                 {% csrf_token %}
                                 <div class="field">
@@ -128,6 +129,7 @@
                                 <button class="ui blue button" style="width: 100%;" type="submit"><i class="icon edit"></i> Add Comment</button>
 
                             </form>
+                        {% endif %}
                         </div>
                     </div>
 
@@ -249,7 +251,9 @@
                     {% endif %}
                     .rating('setting', 'onRate', function(event) {
                         var current = event
+                            {% if not request.user.is_superuser %}
                         window.location='/event/rate/{{ event.id }}/{{ request.user.id }}/'+current
+                            {% endif %}
                     })
 
 
