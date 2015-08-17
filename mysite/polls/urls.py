@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^main/(?P<category_name>\w+)/(?P<subcategory_name>\w+)$', views.mainFilterSub, name='mainFilter'),
     url(r'^home/$', views.home, name='home'),
     url(r'^event/(?P<event_id>\d+)$', views.event, name='event'),
+    url(r'^event/(?P<event_id>\d+)/like/(?P<user_id>\d+)/(?P<comment_id>\d+)$', views.likeComment, name='event'),
     url(r'^report/$', views.report, name='report'),
     url(r'^alltickets/$', views.all_tickets, name='alltickets'),
     url(r'^contact/$', views.contact, name='contact'),
@@ -27,7 +28,7 @@ urlpatterns = [
     url(r'^removeEvent/(?P<event_id>\d+)/$', views.RemoveEvent, name='RemoveEvent'),
     url(r'^editEvent/(?P<event_id>\d+)/$', views.EditEvent, name='EditEvent'),
     url(r'^logout/$', views.Logout, name='logout'),
-    url(r'^event/rate/(?P<event_id>\d+)/(?P<rate>\d+)$', views.eventRate, name='eventRate'),
+    url(r'^event/rate/(?P<event_id>\d+)/(?P<user_id>\d+)/(?P<rate>\d+)$', views.eventRate, name='eventRate'),
 
 
 

@@ -62,7 +62,7 @@ class Comment(models.Model):
     content=models.TextField()
     time=models.DateTimeField(default=datetime.datetime.now)
     numberOfLikes=models.IntegerField(default=0)
-    #likes=models.ForeignKey('Likers')
+    #likes=models.ForeignKey('Likers', null=True)
     def __str__(self):
         return self.content
 class Category(models.Model):
@@ -80,4 +80,5 @@ class SubCategory(models.Model):
 
 
 class Likers(models.Model):
+    comment = models.ForeignKey('Comment',null=True)
     user=models.ManyToManyField('UserProfile')

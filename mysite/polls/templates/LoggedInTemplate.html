@@ -17,7 +17,7 @@
                 <div class="menu">
                     {% for subcat in subcats %}
                         {% if subcat.daste == category %}
-                            <div class="item" onclick="subcat(event,{{ category.name }},{{ subcat.name }})"> {{ subcat.name }}</div>
+                            <div class="item sub" onclick="window.location='/main/{{ category.name }}/{{ subcat.name }}';"> {{ subcat.name }}</div>
                         {% endif %}
                     {% endfor %}
                 </div>

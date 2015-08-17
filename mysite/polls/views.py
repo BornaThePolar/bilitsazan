@@ -1,7 +1,7 @@
 from random import randint
 from django.shortcuts import render
 from polls.forms import EventForm, TicketTypeFormSet
-from polls.models import Category,SubCategory, Event, EventTicketType, Order, Comment,Ticket
+from polls.models import Category,SubCategory, Event, EventTicketType, Order, Comment,Ticket,Likers
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
 
@@ -269,16 +269,21 @@ def event(request, event_id):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
     event = Event.objects.all().filter(id=event_id)[0]
-    if request.method=='POST':
+    if request.method=='POST' and request.user.is_authenticated():
         commentContent=request.POST.get('content', None)
         userID = request.POST.get('user-id', None)
-        user=UserProfile.objects.filter(id=userID)[0]
+        user=UserProfile.objects.filter(user__id=userID)[0]
+        nlikes=Likers()
         newComment= Comment()
         newComment.content=commentContent
         newComment.author=user
         newComment.time=datetime.datetime.now()
         newComment.event=event
+        newComment.likes=nlikes
         newComment.save()
+        nlikes.comment=newComment
+        nlikes.save()
+
     error = request.GET.get('error', 0)
     bought = request.GET.get('bought', 0)
     comments= Comment.objects.all().filter(event = event).order_by('time')
@@ -449,9 +454,9 @@ def Logout(request):
  logout(request)
  return HttpResponseRedirect('/login/')
 
-def eventRate(request, event_id, rate):
+def eventRate(request, event_id,user_id, rate):
     event=Event.objects.all().filter(id=event_id)[0]
-    user = UserProfile.objects.all().filter(id=event_id)[0]
+    user = UserProfile.objects.all().filter(user__id=user_id)[0]
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
     if user not in event.scoredUsers.all():
@@ -462,9 +467,25 @@ def eventRate(request, event_id, rate):
             event.score=(event.score*event.numberofScorers+float(rate))/(event.numberofScorers+1)
             event.numberofScorers+=1
         event.scoredUsers.add(user)
-
-
     event.save()
     print(event.score)
     print(rate)
+    return HttpResponseRedirect('/event/'+event_id)
+
+def likeComment(request,event_id,user_id,comment_id):
+    event=Event.objects.filter(id=event_id)[0]
+    user=UserProfile.objects.filter(user__id=user_id)[0]
+    comment = Comment.objects.filter(id=comment_id)[0]
+    likers=Likers.objects.filter(comment__id=comment_id)[0]
+
+    if user not in likers.user.all():
+        likers.user.add(user)
+        likers.save()
+        comment.numberOfLikes+=1
+        comment.save()
+    else:
+        likers.user.remove(user)
+        likers.save()
+        comment.numberOfLikes-=1
+        comment.save()
     return HttpResponseRedirect('/event/'+event_id)

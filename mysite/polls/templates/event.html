@@ -109,8 +109,10 @@
                                     <div class="text">
                                         {{ comment.content }}
                                     </div>
+
                                     <div class="actions">
-                                        <a class="reply">Like</a>
+                                        <p ><i style="color: red" class="heart icon"></i> {{ comment.numberOfLikes }}</p>
+                                        <a href="{{ event.id }}/like/{{ user.id }}/{{ comment.id }}" class="reply">Like</a>
                                     </div>
                                 </div>
                             </div>
@@ -246,7 +248,7 @@
                     {% endif %}
                     .rating('setting', 'onRate', function(event) {
                         var current = event
-                        window.location='/event/rate/{{ event.id }}/'+current
+                        window.location='/event/rate/{{ event.id }}/{{ request.user.id }}/'+current
                     })
 
 
