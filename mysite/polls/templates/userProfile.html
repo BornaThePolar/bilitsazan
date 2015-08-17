@@ -1,31 +1,37 @@
 {% extends my_template %}
 
 {% block content %}
+    <br><br><br><br>
+    <div class="ui vertical stripe segment">
+        <div class="ui middle centered aligned stackable grid container"
+             style="background-color: white; border-radius: 1%">
+            <div class="row">
+                <div class="twelve wide column">
 
-    <div class="ui middle aligned center aligned grid">
-        <div class="five wide column">
+                    <h2>User Profile:</h2>
 
-            <div>
+                    Email: {{ user.email }}<br>
+                    Name: {{ user.first_name }} {{ user.last_name }}<br>
+                    Admin Status: {% if user.is_superuser%} Admin {% else %}Normal User{% endif %}<br>
+                    <a href="/report/">List of purchased tickets</a>
 
-                <h1>{{ user.email}}</h1>
 
+                    <script>
+                        $(document).ready(function () {
+                            // $(".errorlist").attr("class","errorlist ui warning message")
+                            //$(".errorlist").css("list-style-type", "none")
+                            function validate(e) {
+                                e.preventDefault()
+                                if ($('#id_password').val() != $('id-passwordRetype').val()) {
+                                    $('.ui.warning.message').css('display', 'block')
+                                }
+                            }
+
+                        })
+
+                    </script>
+                </div>
             </div>
-
-
-            <script>
-                $(document).ready(function () {
-                    // $(".errorlist").attr("class","errorlist ui warning message")
-                    //$(".errorlist").css("list-style-type", "none")
-                    function validate(e) {
-                        e.preventDefault()
-                        if ($('#id_password').val() != $('id-passwordRetype').val()) {
-                            $('.ui.warning.message').css('display', 'block')
-                        }
-                    }
-
-                })
-
-            </script>
         </div>
     </div>
 {% endblock %}
