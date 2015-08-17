@@ -30,7 +30,7 @@ urlpatterns = [
     url(r'^editEvent/(?P<event_id>\d+)/$', views.EditEvent, name='EditEvent'),
     url(r'^logout/$', views.Logout, name='logout'),
     url(r'^event/rate/(?P<event_id>\d+)/(?P<user_id>\d+)/(?P<rate>\d+)$', views.eventRate, name='eventRate'),
-
+    url(r'^order/(?P<order_id>\d+)$', views.order, name='order'),
 
 
 

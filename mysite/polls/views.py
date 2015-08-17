@@ -322,6 +322,25 @@ def event(request, event_id):
 
     return render(request, 'event.html', context)
 
+def order(request, order_id):
+    categories = Category.objects.all()
+    subcats = SubCategory.objects.all()
+
+    order = Order.objects.get(id=order_id)
+
+    if request.user.is_superuser:
+        context = {'my_template': 'adminTemplate.html', 'categories': categories, 'subcats': subcats,
+                   'order': order}
+    else:
+        if request.user.is_authenticated():
+            context = {'my_template': 'LoggedInTemplate.html', 'categories': categories, 'subcats': subcats,
+                       'order': order}
+        else:
+            context = {'my_template': 'NotLoggedIn.html', 'categories': categories, 'subcats': subcats,
+                       'order': order}
+
+    return render(request, 'order.html', context)
+
 def report(request):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()

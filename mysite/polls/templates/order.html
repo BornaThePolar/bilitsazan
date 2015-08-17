@@ -1,0 +1,69 @@
+{% extends my_template %}
+
+{% block content %}
+    <br><br><br><br>
+    <div class="ui vertical stripe segment">
+        <div class="ui middle centered aligned stackable grid container"
+             style="background-color: white; border-radius: 1%">
+            <div class="row">
+                <div class="twelve wide column">
+
+                    <h2>Your Order:</h2>
+
+                    <div class="ui form">
+                        <div class="field">
+                            <label>Event</label>
+                            <a href="/event/{{ order.event.id }}">{{ order.event.subject }}</a>
+                        </div>
+
+                        <div class="field">
+                            <label>Date</label>
+                            <span>{{ order.event.date  }}</span>
+                        </div>
+                        <div class="field">
+                            <label>Ticket Type</label>
+                            <span>{{ order.ticket_type.name }}</span>
+                        </div>
+                        <div class="field">
+                            <label>Number of Tickets</label>
+                            <span>{{ order.number }}</span>
+                        </div>
+                        <div class="field">
+                            <label>Total Price</label>
+                            <span>{{ order.cost }}</span>
+                        </div>
+
+                        <div class="field">
+                            <label>Purchase Date</label>
+                            <span>{{ order.date }}</span>
+                        </div>
+                        <div class="field">
+                            <label>Purchase Code</label>
+                            <span>{{ order.rahgiriCode }}</span>
+                        </div>
+                        <a href="javascript:window.print()"><input type="button" value="Print!"></a>
+
+                    </div>
+
+
+                    <script>
+                        $(document).ready(function () {
+                            // $(".errorlist").attr("class","errorlist ui warning message")
+                            //$(".errorlist").css("list-style-type", "none")
+                            function validate(e) {
+                                e.preventDefault()
+                                if ($('#id_password').val() != $('id-passwordRetype').val()) {
+                                    $('.ui.warning.message').css('display', 'block')
+                                }
+                            }
+
+                        })
+
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
