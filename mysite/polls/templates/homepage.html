@@ -177,12 +177,12 @@
 
              {% for category in categories %}
 
-                 <div class="item">
+                 <div class="item" onclick="window.location='/main/{{ category.name }}';">
                  {{ category.name }}
                 <div class="menu">
                     {% for subcat in subcats %}
                         {% if subcat.daste == category %}
-                            <div class="item"> {{ subcat.name }}</div>
+                             <div class="item sub" onclick="window.location='/main/{{ category.name }}/{{ subcat.name }}';"> {{ subcat.name }}</div>
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -275,12 +275,12 @@
        <i class="dropdown icon"></i>
              {% for category in categories %}
 
-                 <div class="item">
+                 <div class="item" onclick="window.location='/main/{{ category.name }}';">
                  {{ category.name }}
                 <div class="menu">
                     {% for subcat in subcats %}
                         {% if subcat.daste == category %}
-                            <div class="item"> {{ subcat.name }}</div>
+                            <div class="item sub" onclick="window.location='/main/{{ category.name }}/{{ subcat.name }}';"> {{ subcat.name }}</div>
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -460,10 +460,14 @@
   </div>
 </div>
 <script>
+    $('.sub').click(function(event){
+            event.stopPropagation()
+
   $('.dropdown').dropdown({
     // you can use any ui transition
     transition: 'drop'
 
+        })
 
   })
   $('.dropdown').dropdown({on:'hover'});
