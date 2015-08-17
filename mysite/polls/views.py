@@ -1,7 +1,7 @@
 from random import randint
 from django.shortcuts import render
 from polls.forms import EventForm, TicketTypeFormSet
-from polls.models import Category,SubCategory, Event, EventTicketType, Order
+from polls.models import Category,SubCategory, Event, EventTicketType, Order, Comment
 from django.http import HttpResponseRedirect
 from django.contrib.auth import logout
 
@@ -15,9 +15,9 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from polls.models import UserProfile
 from django.contrib.auth.models import User
-from django.forms.util import ErrorList
+from django.forms.utils import ErrorList
 from django.db import IntegrityError
-
+import datetime
 
 
 from .forms import Register
@@ -258,25 +258,34 @@ def home(request):
 def event(request, event_id):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
-    event = Event.objects.all().filter(id=event_id)
-
+    event = Event.objects.all().filter(id=event_id)[0]
+    if request.method=='POST':
+        commentContent=request.POST.get('content', None)
+        userID = request.POST.get('user-id', None)
+        user=UserProfile.objects.filter(id=userID)[0]
+        newComment= Comment()
+        newComment.content=commentContent
+        newComment.author=user
+        newComment.time=datetime.datetime.now()
+        newComment.event=event
+        newComment.save()
     error = request.GET.get('error', 0)
     bought = request.GET.get('bought', 0)
-
+    comments= Comment.objects.all().filter(event = event).order_by('time')
     order = None
     if bought:
         order = Order.objects.get(id=bought)
 
     if request.user.is_superuser:
         context = {'my_template': 'adminTemplate.html', 'categories': categories, 'subcats': subcats, 'event': event,
-                   'error': error, 'order': order}
+                   'error': error, 'order': order, 'comments': comments}
     else:
         if request.user.is_authenticated():
             context = {'my_template': 'LoggedInTemplate.html', 'categories': categories, 'subcats': subcats,
-                       'event': event, 'error': error, 'order': order}
+                       'event': event, 'error': error, 'order': order, 'comments': comments}
         else:
             context = {'my_template': 'NotLoggedIn.html', 'categories': categories, 'subcats': subcats, 'event': event,
-                       'error': error, 'order': order}
+                       'error': error, 'order': order, 'comments': comments}
 
     return render(request, 'event.html', context)
 
