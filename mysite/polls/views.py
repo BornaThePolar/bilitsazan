@@ -166,7 +166,7 @@ def log(request):
                 login(request, user)
                 return HttpResponseRedirect('/main/')
             else:
-                error='Username or Password is wrong'
+                error='Username and Password do not match'
 
     if request.user.is_authenticated():
         context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats , 'error':error}
