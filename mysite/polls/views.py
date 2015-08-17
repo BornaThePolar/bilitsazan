@@ -15,6 +15,8 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from polls.models import UserProfile
 from django.contrib.auth.models import User
+from django.forms.util import ErrorList
+from django.db import IntegrityError
 
 
 
@@ -22,35 +24,40 @@ from .forms import Register
 from .forms import EventSubmit
 
 def register(request):
-
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/main/')
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
 
 
     user = UserProfile()
+
     if request.method== 'POST':
-        print('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy')
         form=Register(request.POST)
+        context = {'form': form,'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+
+
         if form.is_valid():
-           # valid = True
+
             if form.cleaned_data['password'] != form.cleaned_data['passwordRetype']:
-                form._errors["password"] = ErrorList([u"Passwords do not match"])
+                form._errors["password"] = ErrorList(["Passwords do not match"])
+                return render(request, 'register.html', context)
+            if User.objects.filter(username = form.cleaned_data['userName']).exists():
+                form._errors["userName"] = ErrorList(["User already exists"])
+                return render(request, 'register.html', context)
+            form._errors["userName"] = ErrorList(["this user already exists"])
             user.user=User.objects._create_user(form.cleaned_data['userName'],form.cleaned_data['email'],form.cleaned_data['password'],False,False,first_name=form.cleaned_data['name'],last_name=form.cleaned_data['lastName'])
-
-           # user.user.first_name=form.cleaned_data['name']
-          #  user.user.last_name=form.cleaned_data['lastName']
-            user.birthday=form.cleaned_data['birthday']
-            #user.photo=None
-            #user.follower=[]
-            #user.following=[]
+            user.gender=form.cleaned_data['gender']
             user.save()
-            return HttpResponseRedirect('/main/')
+            return HttpResponseRedirect('/login/')
+
+
     else:
-        print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
         form=Register()
+        context = {'form': form,'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
 
 
-    context = {'form': form,'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+
     return render(request, 'register.html', context)
 
 
@@ -162,7 +169,7 @@ def log(request):
                 login(request, user)
                 return HttpResponseRedirect('/main/')
             else:
-                error='Username or Password is wrong'
+                error='Username and Password do not match'
 
     if request.user.is_authenticated():
         context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats , 'error':error}
@@ -235,16 +242,16 @@ def mainFilterSub(request,category_name, subcategory_name):
 def home(request):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
-    newEvents = Event.objects.all().order_by('-date')
-    popular = Event.objects.all().order_by('-score')
+    newEvents = Event.objects.all().order_by('-date')[:6]
+    popular = Event.objects.all().order_by('-score')[:6]
     if request.user.is_superuser:
-         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular}
+         context = {'superuser': True,'login': True,'categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular}
     else:
         if request.user.is_authenticated():
-            context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular}
+            context = {'login': True,'categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular}
         else:
             error='You must first login'
-            context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular , 'error' : error}
+            context = {'login': False,'categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular , 'error' : error}
 
     return render(request, 'homepage.html', context)
 
@@ -401,3 +408,19 @@ def EditEvent(request,event_id):
 def Logout(request):
  logout(request)
  return HttpResponseRedirect('/login/')
+
+def eventRate(request, event_id, rate):
+    event=Event.objects.all().filter(id=event_id)[0]
+    #user = UserProfile.objects.all().filter(id=user_id)[0]
+    categories = Category.objects.all()
+    subcats = SubCategory.objects.all()
+    if event.numberofScorers==0:
+        event.score=rate
+        event.numberofScorers+=1
+    else:
+        event.score=(event.score*event.numberofScorers+float(rate))/(event.numberofScorers+1)
+        event.numberofScorers+=1
+    event.save()
+    print(event.score)
+    print(rate)
+    return HttpResponseRedirect('/event/'+event_id)

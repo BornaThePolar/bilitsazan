@@ -1,40 +1,63 @@
 
-    {% extends my_template %}
+{% extends my_template %}
 
 {% block content %}
 
-<div class="ui middle aligned center aligned grid" style="margin-top: 150px">
- <div   class="five wide column">
- <h2 class="ui teal image header">
- <div class="content">
- Please Register...
- </div>
- </h2>
- <form class="ui large form">
- <div class="ui stacked segment">
- <div class="field">
+    <div class="ui middle aligned center aligned grid" style="margin-top: 150px">
+    <div   class="five wide column">
+        <h2 class="ui teal image header">
+            <div class="content">
+                Please Register...
+            </div>
+        </h2>
+        <form class="ui large form" onsubmit="validate(e)" method="post">
+            <div class="ui stacked segment">
+                <div class="field">
 
 
- {% csrf_token %}
-                             {% for field in form %}
-                            <div class="form-group">
-                                {{ field.errors }}
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
 
-                               {{ field }}
-                            </div>
-                             {% endfor %}
-
-
- </div>
-
-<input type="submit" class="btn btn-success" style="width: 100%;" value="Register" /> </div>
-
- <div class="ui error message"></div>
-
- </form>
+                            {% for error in field.errors %}
+                                 <div class="ui negative message">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            {{ error }}
+                        </div>
+                        </div>
+                            {% endfor %}
 
 
- </div>
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+
+
+                </div>
+                <button class="ui blue button" style="width: 100%;" type="submit">register</button>
+                <!--<input type="submit" class="btn btn-success" style="width: 100%;" value="Register" /> </div>-->
+
+
+            </div>
+        </form>
+
+        <script>
+            $(document).ready(function(){
+                // $(".errorlist").attr("class","errorlist ui warning message")
+                //$(".errorlist").css("list-style-type", "none")
+                function validate(e){
+                    e.preventDefault()
+                    if($('#id_password').val()!=$('id-passwordRetype').val()){
+                        $('.ui.warning.message').css('display','block')
+                    }
+                }
+
+            })
+
+        </script>
+    </div>
+    </div>
 {% endblock %}
 
 

@@ -153,7 +153,7 @@
                                     <textarea></textarea>
                                 </div>
                                 <div class="ui blue labeled submit icon button">
-                                    <i class="icon edit"></i> Add Reply
+                                    <i class="icon edit"></i> Add Comment
                                 </div>
                             </form>
                         </div>
@@ -210,7 +210,7 @@
                     </div>
                 </div>
             </div>
-
+        <input type="hidden" value="{{ user.id }}">
         </div>
         <script>
             var score=0;
@@ -222,49 +222,68 @@
 
 
             })
+            {#            function getRating() {#}
+            {#    var currentRating = $('.rating').rating('get rating');#}
+            {#    alert('Current rating is: ' + currentRating);#}
+
+
+            // Add javascript here
+
+            //$('.ui.rating')
+
             $(document).ready(function(){
                 $('.rating')
-
+                        {#                    .rating('setting', 'onRate', function(value) {#}
+                        {#                    var currentRating = value#}
+                        {#                     alert('Current rating is: ' + currentRating);#}
+                        {#                        })#}
                         {% if event.score >= 0 and event.score < 1 %}
                             .rating({
                                     initialRating: 0,
                                     maxRating: 5
+
                                 })
+
                         {% endif %}
-                        {% if event.score >= 1 and event.score < 2 %}
-                            .rating({
-                                    initialRating: 1,
-                                    maxRating: 5
-                                })
-                        {% endif %}
-                        {% if event.score >= 2 and event.score < 3 %}
-                            .rating({
-                                    initialRating: 2,
-                                    maxRating: 5
-                                })
-                        {% endif %}
-                        {% if event.score >= 3 and event.score < 4 %}
-                            .rating({
-                                    initialRating: 3,
-                                    maxRating: 5
-                                })
-                        {% endif %}
-                        {% if event.score >= 4 and event.score < 5 %}
-                            .rating({
-                                    initialRating: 4,
-                                    maxRating: 5
-                                })
-                        {% endif %}
-                        {% if event.score == 5 %}
-                            .rating({
-                                    initialRating: 5,
-                                    maxRating: 5
-                                })
-                        {% endif %}
+                    {% if event.score >= 1 and event.score < 2 %}
+                        .rating({
+                                initialRating: 1,
+                                maxRating: 5
+                            })
+                    {% endif %}
+                    {% if event.score >= 2 and event.score < 3 %}
+                        .rating({
+                                initialRating: 2,
+                                maxRating: 5
+                            })
+                    {% endif %}
+                    {% if event.score >= 3 and event.score < 4 %}
+                        .rating({
+                                initialRating: 3,
+                                maxRating: 5
+                            })
+                    {% endif %}
+                    {% if event.score >= 4 and event.score < 5 %}
+                        .rating({
+                                initialRating: 4,
+                                maxRating: 5
+                            })
+                    {% endif %}
+                    {% if event.score == 5 %}
+                        .rating({
+                                initialRating: 5,
+                                maxRating: 5
+                            })
+                    {% endif %}
+                    .rating('setting', 'onRate', function(event) {
+                        var current = event
+                        window.location='/event/rate/{{ event.id }}/'+current
+                    })
 
 
 
-            })
+            });
+
 
             $('.dropdown').dropdown({on:'hover'});
 

@@ -36,6 +36,7 @@
 
   <style type="text/css">
 
+
     .hidden.menu {
       display: none;
     }
@@ -53,11 +54,11 @@
     .masthead h1.ui.header {
       margin-top: 3em;
       margin-bottom: 0em;
-      font-size: 4em;
+
       font-weight: normal;
     }
     .masthead h2 {
-      font-size: 1.7em;
+
       font-weight: normal;
     }
 
@@ -65,7 +66,7 @@
       padding: 8em 0em;
     }
     .ui.vertical.stripe h3 {
-      font-size: 2em;
+
     }
     .ui.vertical.stripe .button + h3,
     .ui.vertical.stripe p + h3 {
@@ -75,7 +76,7 @@
       clear: both;
     }
     .ui.vertical.stripe p {
-      font-size: 1.33em;
+
     }
     .ui.vertical.stripe .horizontal.divider {
       margin: 3em 0em;
@@ -112,14 +113,18 @@
         min-height: 350px;
       }
       .masthead h1.ui.header {
-        font-size: 2em;
+
         margin-top: 1.5em;
       }
       .masthead h2 {
         margin-top: 0.5em;
-        font-size: 1.5em;
+
       }
     }
+      .item {
+          font-size: 14px;
+      }
+
 
 
   </style>
@@ -169,7 +174,7 @@
       <div class="menu" style="z-index: 100">
 
 
-       <i class="dropdown icon"></i>
+
              {% for category in categories %}
 
                  <div class="item">
@@ -189,14 +194,40 @@
     <a class="item" class="item"onclick="window.location='/contact';">Contact Us</a>
     <a class="item" onclick="window.location='/about';" >About US</a>
     <div class="right menu">
-       <div class="item"><div class="ui icon input">
-</div></div>
+
+
+        {% if not login %}
       <div class="item">
         <a class="ui button" onclick="window.location='/login';" >User Profile</a>
       </div>
       <div class="item">
         <a class="ui primary button" onclick="window.location='/logout';" >Sign out</a>
       </div>
+        {% endif %}
+    {% if superuser and login %}
+        <div class="item">
+        <a class="ui blue basic button" onclick="window.location='/eventsubmit';"> <i class="user icon"></i>New Event</a>
+      </div>
+
+      <div class="item">
+        <a class="ui blue basic button" onclick="window.location='/manage';"> <i class="user icon"></i>Manage</a>
+      </div>
+         <div class="item">
+        <a class="ui blue basic button" onclick="window.location='/eventreport';"> <i class="user icon"></i>Full Report</a>
+      </div>
+      <div class="item">
+        <a class="ui black button" onclick="window.location='/logout';" >Log out</a>
+      </div>
+    {% endif %}
+    {% if login and not superuser %}
+        <div class="item">
+        <a class="ui  blue basic button" onclick="window.location='/alltickets';" >All tickets</a>
+      </div>
+       <div class="item">
+        <a class="ui  black button" onclick="window.location='/logout';" >Log out</a>
+      </div>
+    {% endif %}
+
     </div>
   </div>
 </div>
@@ -262,11 +293,38 @@
         <a class="item" onclick="window.location='/about';" >About US</a>
 
         <div class="right item">
-          <div class="item"><div class="ui icon input">
+          {% if not login %}
+      <div class="item">
+        <a class="ui inverted brown button" onclick="window.location='/login';" >Login</a>
+      </div>
+      <div class="item">
+        <a class="ui inverted olive button" onclick="window.location='/register';" >Sign up</a>
+      </div>
+        {% endif %}
+    {% if superuser and login %}
+        <div class="item">
+        <a class="ui inverted brown button" onclick="window.location='/eventsubmit';"> <i class="user icon"></i>New Event</a>
+      </div>
 
-</div></div>
-          <a class="ui inverted brown button" onclick="window.location='/login';" >User Profile</a>
-          <a class="ui inverted olive button" onclick="window.location='/logout';" >Sign out</a>
+      <div class="item">
+        <a class="ui inverted brown button" onclick="window.location='/manage';"> <i class="user icon"></i>Manage</a>
+      </div>
+         <div class="item">
+        <a class="ui inverted brown button" onclick="window.location='/eventreport';"> <i class="user icon"></i>Full Report</a>
+      </div>
+      <div class="item">
+        <a class="ui inverted olive button" onclick="window.location='/logout';" >Log out</a>
+      </div>
+    {% endif %}
+    {% if login and not superuser %}
+        <div class="item">
+        <a class="ui  inverted brown button" onclick="window.location='/alltickets';" >All tickets</a>
+      </div>
+       <div class="item">
+        <a class="ui inverted olive button" onclick="window.location='/logout';" >Log out</a>
+      </div>
+    {% endif %}
+
         </div>
       </div>
     </div>
@@ -302,10 +360,15 @@
                   <p></p>
                 </div>
                 <div class="extra">
-                  <div class="ui right floated primary button" onclick="window.location='/event/{{ event.id }}';" >
+                    {% if error != None %}
+
+                     {% else %}
+                         <div class="ui right floated primary button" onclick="window.location='/event/{{ event.id }}';" >
                     Buy tickets
                     <i class="right chevron icon"></i>
                   </div>
+                    {% endif %}
+
                 </div>
               </div>
             </div>
@@ -341,12 +404,14 @@
                 <div class="description">
                   <p></p>
                 </div>
-                <div class="extra">
-                  <div class="ui right floated primary button"onclick="window.location='/event/{{ event.id }}';">
+                {% if error != None %}
+
+                     {% else %}
+                         <div class="ui right floated primary button" onclick="window.location='/event/{{ event.id }}';" >
                     Buy tickets
                     <i class="right chevron icon"></i>
                   </div>
-                </div>
+                    {% endif %}
               </div>
             </div>
             {% endfor %}
