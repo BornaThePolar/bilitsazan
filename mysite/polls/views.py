@@ -298,6 +298,7 @@ def event(request, event_id):
 def report(request):
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
+
     if request.user.is_superuser:
          context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats}
     else:
@@ -305,6 +306,10 @@ def report(request):
             context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats}
         else:
             context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+
+    orders = request.user.order_set.all()
+
+    context['orders'] = orders
 
     return render(request, 'report.html', context)
 
