@@ -10,15 +10,25 @@
  Please Register...
  </div>
  </h2>
- <form class="ui large form" method="post">
+ <form class="ui large form" onsubmit="validate(e)" method="post">
  <div class="ui stacked segment">
  <div class="field">
+    <div class="ui warning message" style="display: none">
 
+  <div class="header">
+    Passwords do not match
+  </div>
+
+</div>
 
  {% csrf_token %}
                              {% for field in form %}
                             <div class="form-group">
-                                {{ field.errors }}
+
+
+
+                            {{ field.errors }}
+
 
                                {{ field }}
                             </div>
@@ -33,7 +43,20 @@
 
  </form>
 
+<script>
+    $(document).ready(function(){
+       // $(".errorlist").attr("class","errorlist ui warning message")
+        //$(".errorlist").css("list-style-type", "none")
+        function validate(e){
+            e.preventDefault()
+            if($('#id_password').val()!=$('id-passwordRetype').val()){
+                $('.ui.warning.message').css('display','block')
+            }
+        }
 
+    })
+
+</script>
  </div>
 {% endblock %}
 

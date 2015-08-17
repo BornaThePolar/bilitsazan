@@ -20,24 +20,24 @@ from .forms import Register
 from .forms import EventSubmit
 
 def register(request):
-
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/main/')
     categories = Category.objects.all()
     subcats = SubCategory.objects.all()
 
 
     user = UserProfile()
     if request.method== 'POST':
-        print('yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy')
         form=Register(request.POST)
         if form.is_valid():
             if form.cleaned_data['password'] != form.cleaned_data['passwordRetype']:
-                form._errors["password"] = ErrorList([u"Passwords do not match"])
+                form._errors["password"] = ErrorList(["Passwords do not match"])
+            #if
             user.user=User.objects._create_user(form.cleaned_data['userName'],form.cleaned_data['email'],form.cleaned_data['password'],False,False,first_name=form.cleaned_data['name'],last_name=form.cleaned_data['lastName'])
             user.gender=form.cleaned_data['gender']
             user.save()
-            return HttpResponseRedirect('/main/')
+            return HttpResponseRedirect('/login/')
     else:
-        print('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
         form=Register()
 
 
