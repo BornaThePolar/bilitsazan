@@ -64,3 +64,4 @@ mysite/.idea/workspace.xml
 mysite/db.sqlite3
 mysite/polls/migrations/0015_auto_20150817_1002.py
 mysite/db.sqlite3
+mysite/db.sqlite3
