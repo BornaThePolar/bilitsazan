@@ -36,6 +36,7 @@
 
   <style type="text/css">
 
+
     .hidden.menu {
       display: none;
     }
@@ -123,6 +124,7 @@
       .item {
           font-size: 14px;
       }
+
 
 
   </style>
@@ -358,10 +360,15 @@
                   <p></p>
                 </div>
                 <div class="extra">
-                  <div class="ui right floated primary button" onclick="window.location='/event/{{ event.id }}';" >
+                    {% if error != None %}
+
+                     {% else %}
+                         <div class="ui right floated primary button" onclick="window.location='/event/{{ event.id }}';" >
                     Buy tickets
                     <i class="right chevron icon"></i>
                   </div>
+                    {% endif %}
+
                 </div>
               </div>
             </div>
@@ -397,12 +404,14 @@
                 <div class="description">
                   <p></p>
                 </div>
-                <div class="extra">
-                  <div class="ui right floated primary button"onclick="window.location='/event/{{ event.id }}';">
+                {% if error != None %}
+
+                     {% else %}
+                         <div class="ui right floated primary button" onclick="window.location='/event/{{ event.id }}';" >
                     Buy tickets
                     <i class="right chevron icon"></i>
                   </div>
-                </div>
+                    {% endif %}
               </div>
             </div>
             {% endfor %}
