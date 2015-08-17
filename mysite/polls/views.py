@@ -12,7 +12,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login
 from polls.models import UserProfile
 from django.contrib.auth.models import User
-from django.forms.util import ErrorList
+from django.forms.utils import ErrorList
 from django.db import IntegrityError
 
 

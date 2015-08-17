@@ -91,7 +91,18 @@
                                 <div class="ui dimmer">
                                     <div class="content">
                                         <div class="center">
-                                            <div class="ui inverted button" onclick="window.location='/event/{{ event.id }}';" >Buy</div>
+                                            {% if error != None %}
+                                                <div class="ui inverted button" >Buy</div>
+                                                <div class="ui negative message">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            {{ error }}
+                        </div>
+                        </div>
+                                            {% else %}
+                                                <div class="ui inverted button" onclick="window.location='/event/{{ event.id }}';" >Buy</div>
+                                            {% endif %}
+
                                         </div>
                                     </div>
                                 </div>
@@ -129,6 +140,7 @@
                         </div>
                     {% endfor %}
                 </div>
+           }
             </div>
         </div>
     </div>
