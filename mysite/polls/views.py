@@ -13,6 +13,7 @@ from django.contrib.auth import authenticate, login
 from polls.models import UserProfile
 from django.contrib.auth.models import User
 from django.forms.util import ErrorList
+from django.db import IntegrityError
 
 
 
@@ -27,21 +28,33 @@ def register(request):
 
 
     user = UserProfile()
+
     if request.method== 'POST':
         form=Register(request.POST)
+        context = {'form': form,'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+
+
         if form.is_valid():
+
             if form.cleaned_data['password'] != form.cleaned_data['passwordRetype']:
                 form._errors["password"] = ErrorList(["Passwords do not match"])
-            #if
+                return render(request, 'register.html', context)
+            if User.objects.filter(username = form.cleaned_data['userName']).exists():
+                form._errors["userName"] = ErrorList(["User already exists"])
+                return render(request, 'register.html', context)
+            form._errors["userName"] = ErrorList(["this user already exists"])
             user.user=User.objects._create_user(form.cleaned_data['userName'],form.cleaned_data['email'],form.cleaned_data['password'],False,False,first_name=form.cleaned_data['name'],last_name=form.cleaned_data['lastName'])
             user.gender=form.cleaned_data['gender']
             user.save()
             return HttpResponseRedirect('/login/')
+
+
     else:
         form=Register()
+        context = {'form': form,'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
 
 
-    context = {'form': form,'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats}
+
     return render(request, 'register.html', context)
 
 
