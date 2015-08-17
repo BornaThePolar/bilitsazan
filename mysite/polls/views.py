@@ -20,8 +20,26 @@ from django.db import IntegrityError
 import datetime
 
 
+
 from .forms import Register
 from .forms import EventSubmit
+
+
+def profile(request):
+    categories = Category.objects.all()
+    subcats = SubCategory.objects.all()
+    if request.user.is_superuser:
+        context = {'my_template': 'adminTemplate.html', 'categories': categories, 'subcats': subcats,
+                   "user": request.user}
+    else:
+        if request.user.is_authenticated():
+            context = {'my_template': 'LoggedInTemplate.html', 'categories': categories, 'subcats': subcats,
+                       "user": request.user}
+        else:
+            context = {'my_template': 'NotLoggedIn.html', 'categories': categories, 'subcats': subcats,
+                       "user": UserProfile.objects.get(user=request.user)}
+
+    return render(request, 'userProfile.html', context)
 
 from django.template.defaulttags import register
 
