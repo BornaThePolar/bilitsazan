@@ -8,7 +8,8 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     gender = models.BooleanField()
     isSuperUSer=models.BooleanField(default=False)
-
+    def __str__(self):
+        return self.user.first_name
 
 class Order(models.Model):
     user=models.ForeignKey(User)
@@ -60,7 +61,7 @@ class Comment(models.Model):
     content=models.TextField()
     time=models.DateTimeField(default=datetime.datetime.now)
     numberOfLikes=models.IntegerField()
-    likes=models.ForeignKey('Likers')
+    #likes=models.ForeignKey('Likers')
 
 class Category(models.Model):
     name=models.CharField(max_length=32)
