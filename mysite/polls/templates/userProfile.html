@@ -9,10 +9,28 @@
                 <div class="twelve wide column">
 
                     <h2>User Profile:</h2>
+                    <div class="ui form">
+                    <div class="disabled field">
+                                <label>Username</label>
+                                <input placeholder="{{ user.username }}" disabled="" type="text">
+                            </div>
 
-                    Email: {{ user.email }}<br>
-                    Name: {{ user.first_name }} {{ user.last_name }}<br>
-                    Admin Status: {% if user.is_superuser%} Admin {% else %}Normal User{% endif %}<br>
+                            <div class="disabled field">
+                                <label>First Name</label>
+                                <input placeholder="{{ user.first_name }}" disabled="" type="text">
+                            </div>
+                            <div class="disabled field">
+                                <label>First Name</label>
+                                <input placeholder="{{ user.last_name }}" disabled="" type="text">
+                            </div>
+                        <div class="disabled field">
+                                <label>Admin Status</label>
+                                <input placeholder="{% if user.is_superuser%} Admin {% else %}Normal User{% endif %}" disabled="" type="text">
+                            </div>
+
+
+                    </div>
+
                     <a href="/report/">List of purchased tickets</a>
 
 
