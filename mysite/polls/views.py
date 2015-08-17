@@ -242,13 +242,13 @@ def home(request):
     newEvents = Event.objects.all().order_by('-date')[:6]
     popular = Event.objects.all().order_by('-score')[:6]
     if request.user.is_superuser:
-         context = {'my_template': 'adminTemplate.html','categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular}
+         context = {'superuser': True,'login': True,'categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular}
     else:
         if request.user.is_authenticated():
-            context = {'my_template': 'LoggedInTemplate.html','categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular}
+            context = {'login': True,'categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular}
         else:
             error='You must first login'
-            context = {'my_template': 'NotLoggedIn.html','categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular , 'error' : error}
+            context = {'login': False,'categories': categories, 'subcats': subcats,'new': newEvents, 'popular': popular , 'error' : error}
 
     return render(request, 'homepage.html', context)
 
