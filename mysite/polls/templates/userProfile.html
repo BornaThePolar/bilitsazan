@@ -1,0 +1,33 @@
+{% extends my_template %}
+
+{% block content %}
+
+    <div class="ui middle aligned center aligned grid">
+        <div class="five wide column">
+
+            <div>
+
+                <h1>{{ user.email}}</h1>
+
+            </div>
+
+
+            <script>
+                $(document).ready(function () {
+                    // $(".errorlist").attr("class","errorlist ui warning message")
+                    //$(".errorlist").css("list-style-type", "none")
+                    function validate(e) {
+                        e.preventDefault()
+                        if ($('#id_password').val() != $('id-passwordRetype').val()) {
+                            $('.ui.warning.message').css('display', 'block')
+                        }
+                    }
+
+                })
+
+            </script>
+        </div>
+    </div>
+{% endblock %}
+
+

@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^eventsubmit/$', views.eventSubmit, name='eventSubmit'),
     url(r'^buy/(?P<event_id>\d+)$', views.buy, name='buy'),
     url(r'^about/$', views.about, name='about'),
+    url(r'^userProfile/?$', views.profile, name='userProfile'),
     url(r'^login/$', views.log, name='login'),
     url(r'^main/$', views.main, name='main'),
     url(r'^main/(?P<category_name>\w+)$', views.mainFilter, name='mainFilter'),
